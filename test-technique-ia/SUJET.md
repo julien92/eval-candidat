@@ -96,7 +96,8 @@ Ta mission : refactorer ce code ET ajouter une nouvelle fonctionnalite.
 ## Ce qu'on attend
 
 1. **Refactoring** du code existant (lisibilite, maintenabilite, bonnes pratiques)
-2. **Implementation** de la nouvelle feature
+2. **Tests** de non-regression — attention a bien choisir le type de tests adapte a la situation
+3. **Implementation** de la nouvelle feature
 
 **Rappel** : Le comportement existant doit etre preserve. A toi de garantir qu'il n'y a pas de regression.
 
