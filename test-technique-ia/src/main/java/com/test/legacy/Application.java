@@ -29,7 +29,7 @@ public class Application {
             s(d);
             try{n(d.get("email"),d);}catch(Exception e){/**/}
             if(d.get("amount")!=null&&Integer.parseInt(d.get("amount").toString())>1000){
-                s(d);aDsc(d);
+                aDsc(d);s(d);
             }
         }
         if(d.get("type").equals("prm")){

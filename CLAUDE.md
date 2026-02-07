@@ -15,7 +15,7 @@ eval-candidat/
 ├── CLAUDE.md                          ← This file
 ├── README.md                          ← Evaluator workflow documentation
 ├── test-technique-evaluateur.md       ← CONFIDENTIAL evaluator grading guide
-├── test-scenarios.sh                  ← Non-regression test script (9 scenarios)
+├── test-scenarios.sh                  ← Non-regression test script (12 scenarios)
 ├── generate-zip-candidat.sh           ← Generates candidate zip (excludes evaluator files)
 ├── .github/workflows/
 │   └── test-scenarios.yml             ← CI: build + non-regression tests (--skip-feature)
@@ -105,19 +105,22 @@ These behaviors are embedded in the legacy code and **must be preserved** during
 
 ## Non-Regression Tests (test-scenarios.sh)
 
-The test script runs 9 scenarios via `curl` against a running instance:
+The test script runs 12 scenarios via `curl` against a running instance:
 
 | # | Scenario                                | Assertion                     |
 |---|-----------------------------------------|-------------------------------|
-| 1 | Standard order creation                 | HTTP 200                      |
-| 2 | Premium order with `premium:true` flag  | Response contains `"premium":true` |
-| 3 | Premium double discount (1000 -> 810)   | Response contains `"amount":810`   |
+| 1 | Standard order (amount <= 1000)         | HTTP 200 + `"amount":500` unchanged |
+| 2 | Premium order (amount=800)              | `"premium":true` + `"amount":648` (double discount) |
+| 3 | Premium double discount (1000 -> 810)   | `"amount":810`   |
 | 4 | Express order creation                  | HTTP 200                      |
 | 5 | Empty email does not block order        | HTTP 200                      |
-| 6 | GET existing order                      | HTTP 200                      |
-| 7 | GET non-existent order                  | HTTP 404                      |
-| 8 | Soft delete then GET returns 404        | HTTP 404                      |
-| 9 | Stats endpoint (`/api/ord/stats`)       | Contains `totalOrders`, `ordersByType`, excludes deleted orders |
+| 6 | Absent email does not block order       | HTTP 200                      |
+| 7 | GET existing order — content verified   | HTTP 200 + body contains type, amount, email |
+| 8 | GET non-existent order                  | HTTP 404                      |
+| 9 | Soft delete then GET returns 404        | DELETE returns HTTP 200 + GET returns HTTP 404 |
+| 10 | DELETE non-existent order              | HTTP 200                      |
+| 11 | Stats endpoint (`/api/ord/stats`)      | Contains all 4 fields, `totalOrders=7`, `ordersByType` values + type mapping |
+| 12 | Standard order (amount > 1000)         | `"amount":1800` (10% discount applied) |
 
 ## Stats Endpoint Specification (New Feature)
 
