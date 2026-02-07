@@ -1,0 +1,56 @@
+name: Non-Regression Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Build project
+        working-directory: test-technique-ia
+        run: mvn package -DskipTests -q
+
+      - name: Start Spring Boot application
+        working-directory: test-technique-ia
+        run: |
+          mvn spring-boot:run &
+          echo $! > /tmp/spring-boot.pid
+
+      - name: Wait for application to start
+        run: |
+          echo "Waiting for Spring Boot to start..."
+          for i in $(seq 1 30); do
+            if curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/api/ord/inexistant 2>/dev/null | grep -q "404"; then
+              echo "Application started successfully"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Application failed to start within 60 seconds"
+          exit 1
+
+      - name: Run non-regression test scenarios
+        run: |
+          chmod +x test-scenarios.sh
+          ./test-scenarios.sh http://localhost:8080
+
+      - name: Stop Spring Boot application
+        if: always()
+        run: |
+          if [ -f /tmp/spring-boot.pid ]; then
+            kill $(cat /tmp/spring-boot.pid) 2>/dev/null || true
+          fi
