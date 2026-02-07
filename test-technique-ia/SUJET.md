@@ -3,8 +3,8 @@
 ## Lancer le projet
 
 ```bash
-# Prerequis : Java 17+, Maven
-mvn spring-boot:run
+# Prerequis : Java 17+
+./mvnw spring-boot:run
 
 # L'API est disponible sur http://localhost:8080
 ```

@@ -3,10 +3,10 @@
 ## Lancer le projet
 
 ```bash
-# Prerequis : Java 17+, Maven
+# Prerequis : Java 17+
 
-# Lancer l'application
-mvn spring-boot:run
+# Lancer l'application (Maven Wrapper inclus, pas besoin d'installer Maven)
+./mvnw spring-boot:run
 
 # L'API est disponible sur http://localhost:8080
 ```

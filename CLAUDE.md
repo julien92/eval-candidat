@@ -20,6 +20,9 @@ eval-candidat/
 ├── .github/workflows/
 │   └── test-scenarios.yml             ← CI: build + non-regression tests (--skip-feature)
 └── test-technique-ia/                 ← Main Java project
+    ├── mvnw                           ← Maven Wrapper (Unix)
+    ├── mvnw.cmd                       ← Maven Wrapper (Windows)
+    ├── .mvn/wrapper/                  ← Maven Wrapper config
     ├── README.md                      ← Project launch instructions
     ├── SUJET.md                       ← Challenge instructions + functional rules
     ├── pom.xml                        ← Maven config (Spring Boot 3.2, Java 17)
@@ -33,7 +36,7 @@ eval-candidat/
 |------------------|--------------------------------|
 | Language         | Java 17                        |
 | Framework        | Spring Boot 3.2.0              |
-| Build tool       | Maven 3                        |
+| Build tool       | Maven 3 (wrapper included)     |
 | Database         | H2 in-memory (`jdbc:h2:mem:testdb`) |
 | ORM              | JPA / Hibernate (create-drop)  |
 | Test framework   | Spring Boot Test (JUnit 5, Mockito) |
@@ -43,7 +46,7 @@ eval-candidat/
 
 ```bash
 # Run the application (from test-technique-ia/)
-cd test-technique-ia && mvn spring-boot:run
+cd test-technique-ia && ./mvnw spring-boot:run
 
 # Run non-regression tests (app must be running on localhost:8080)
 ./test-scenarios.sh
@@ -161,4 +164,4 @@ Constraints:
 5. **The 1000 threshold** for standard orders must be preserved (discount only applied when amount > 1000).
 6. **Keep the double save** for standard (>1000) and premium orders - this is an intentional audit behavior.
 7. When refactoring, focus on: renaming, extracting DTOs, separating into proper layers (controller/service/repository), adding tests.
-8. The Maven project root is `test-technique-ia/` - all `mvn` commands should be run from there.
+8. The Maven project root is `test-technique-ia/` - all Maven commands should be run from there using `./mvnw` (Maven Wrapper).
