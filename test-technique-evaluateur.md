@@ -165,7 +165,7 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 À poser systématiquement :
 
 1. "Pourquoi as-tu commencé par [ce qu'il a fait en premier] ?"
-2. "Pourquoi as-tu choisi ce type de tests ? Qu'est-ce qui t'a guidé dans ce choix ?"
+2. "Pourquoi as-tu choisi ce type de tests ?"
 3. "Qu'est-ce que tu n'as pas eu le temps de faire ?"
 4. "Y a-t-il des comportements dans le code original qui t'ont surpris ?"
 5. "Comment aurais-tu fait différemment avec plus de temps ?"
@@ -176,9 +176,9 @@ Si le candidat a traité le bonus (validation des entrées) :
 7. "Pourquoi as-tu choisi de faire la validation à cet endroit du code (controller / service / autre) ?"
 8. "Quels champs as-tu choisi de valider et pourquoi ceux-là en priorité ?"
 
-### Prompt IA — Aide au scoring du débrief
+### Prompt IA — Accompagnement au débrief
 
-Utiliser le prompt dans **`prompt-evaluation-debrief.md`**. Coller les observations et les réponses du candidat à la suite du prompt. L'IA propose un scoring pour **Méthodologie** (/40) et **Utilisation de l'IA** (/25), et suggère des questions de relance si des zones d'ombre persistent.
+Utiliser le prompt dans **`prompt-evaluation-debrief.md`**. Coller le fichier `resultats-XX-DDMMYYYY.md` (généré à l'étape précédente) à la suite du prompt. L'IA accompagne le recruteur question par question : elle pose les questions une par une, le recruteur donne ses observations et les réponses du candidat, et l'IA aide à structurer et scorer. À la fin, elle renvoie le fichier complet mis à jour.
 
 ---
 
