@@ -9,6 +9,9 @@ Test technique de 20 minutes pour evaluer la capacite d'un developpeur a refacto
 │   └── src/.../legacy/
 │       └── Application.java       ← Un seul fichier : tout le code legacy
 ├── test-technique-evaluateur.md    ← Guide de notation (CONFIDENTIEL)
+├── prompt-evaluation-code.md       ← Prompt IA : analyse du code + non-regression
+├── prompt-evaluation-debrief.md    ← Prompt IA : scoring methodologie + usage IA
+├── resultats-template.md           ← Template a copier en resultats-XX.md
 ├── test-scenarios.sh               ← Script de non-regression (12 tests)
 ├── generate-zip-candidat.sh        ← Genere le zip a envoyer au candidat
 ├── .github/workflows/              ← CI GitHub Actions
@@ -40,7 +43,7 @@ Envoyer le fichier `test-technique-ia.zip` au candidat.
 
 A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 
-**a) Pre-evaluation par IA** — Copier le prompt fourni dans `test-technique-evaluateur.md` (section "Prompt d'Aide a l'Evaluation") dans une IA et coller le code du candidat a la suite. L'IA remplit automatiquement :
+**a) Pre-evaluation par IA** — Copier le prompt de `prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA remplit automatiquement :
 - Les tests de non-regression (analyse statique des 12 scenarios PASS/FAIL)
 - Le scoring qualite du code et feature
 
@@ -52,9 +55,9 @@ A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 
 **c) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. Noter les reponses et les observations (approche, comportement, interaction avec l'IA).
 
-**d) Scoring du debrief par IA** — Copier le second prompt (section "Prompt IA — Aide au scoring du debrief") et coller les observations et reponses du candidat. L'IA propose un scoring pour Methodologie (/40) et Utilisation IA (/25), et suggere des questions de relance si des zones d'ombre persistent.
+**d) Scoring du debrief par IA** — Copier le prompt de `prompt-evaluation-debrief.md` et coller les observations et reponses du candidat. L'IA propose un scoring pour Methodologie (/40) et Utilisation IA (/25), et suggere des questions de relance si des zones d'ombre persistent.
 
-**e) Consolider dans `resultats.md`** — Remplir le template `resultats.md` (fourni dans `test-technique-evaluateur.md`) avec :
+**e) Consolider dans `resultats-XX.md`** — Copier `resultats-template.md` en `resultats-XX.md` (initiales du candidat, ex : `resultats-JD.md` pour Jean Dupont) et le remplir avec :
 - La sortie du prompt IA code (tests de non-regression + scores code/feature)
 - Les resultats confirmes par le script `test-scenarios.sh`
 - La sortie du prompt IA debrief (scores methodologie + utilisation IA)
