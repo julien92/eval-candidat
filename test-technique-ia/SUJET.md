@@ -107,11 +107,7 @@ Ta mission : refactorer ce code ET ajouter une nouvelle fonctionnalite.
 
 ## Bonus (si tu as le temps)
 
-**Validation des champs en entree** : Actuellement, l'API accepte n'importe quoi a la creation d'une commande. Ajoute des controles sur les champs du endpoint `POST /api/ord` :
-
-- `type` : obligatoire, doit etre `"std"`, `"prm"` ou `"exp"`
-- `amount` : obligatoire, doit etre un nombre positif
-- Retourner une erreur HTTP 400 avec un message explicite en cas de champ invalide
+**Validation des champs en entree** : Actuellement, l'API accepte n'importe quoi a la creation d'une commande. Ajoute des controles que tu juges pertinents sur le endpoint `POST /api/ord` et retourne une erreur HTTP 400 en cas de donnees invalides.
 
 **Rappel** : Les bonus ne sont a traiter que si les taches principales sont terminees.
 
