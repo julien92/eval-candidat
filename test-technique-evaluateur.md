@@ -176,6 +176,77 @@ Si le candidat a traité le bonus (validation des entrées) :
 
 ---
 
+## 🤖 Prompt d'Aide à l'Évaluation
+
+Après avoir récupéré le code du candidat, colle le prompt ci-dessous dans ton IA (ChatGPT, Claude, etc.) pour obtenir une pré-évaluation structurée. **Ce n'est qu'une aide** : l'évaluateur garde le dernier mot sur les scores.
+
+> **Mode d'emploi** : copie le prompt, puis colle l'intégralité du code rendu par le candidat à la suite.
+
+````
+Tu es un évaluateur technique senior. Analyse le code ci-dessous, rendu par un candidat lors d'un test technique de 20 minutes. Le candidat devait refactorer un code legacy Java/Spring Boot (gestion de commandes) et implémenter une nouvelle feature.
+
+## Code original (avant refactoring)
+
+Le code de départ était un "god class" unique (Application.java) contenant tout : Spring Boot main, REST controller, JPA entity (classe interne statique `E`), persistence via EntityManager, business logic, notifications et discount. Variables et méthodes en noms abrégés (d, o, E, prcOrd, gtOrd, dlOrd, aDsc, toE, toM). Pas de tests. Map<String, Object> partout.
+
+## Règles métier à préserver (non-régression)
+
+1. Commandes standard (type "std") : sauvegardées 1 fois. Si amount > 1000, remise de 10% puis re-sauvegardées (2 saves au total).
+2. Commandes premium (type "prm") : flag premium=true positionné, sauvegardées 1 fois, puis double remise 10%+10% = 19% (amount * 0.9 * 0.9), puis re-sauvegardées (2 saves au total).
+3. Commandes express (type "exp") : sauvegardées et notifiées comme les standard, sans remise.
+4. Les échecs de notification (email vide/absent) ne bloquent JAMAIS la création — le catch silencieux est intentionnel.
+5. La suppression est un soft delete (status="del"), jamais physique. GET sur une commande supprimée retourne 404.
+
+## Nouvelle feature demandée
+
+GET /api/ord/stats retournant : totalOrders, ordersByType (avec mapping std→standard, prm→premium, exp→express), totalRevenue, averageOrderAmount. Exclure les commandes soft-deleted.
+
+## Bonus (optionnel)
+
+Validation des champs en entrée sur POST /api/ord avec retour HTTP 400. Le candidat choisissait lui-même quels contrôles ajouter.
+
+## Grille d'évaluation (note chaque critère sur le barème indiqué)
+
+### 1. Méthodologie (40 pts)
+- Tests écrits AVANT le refactoring ? (/10)
+- Bon type de tests choisi (intégration HTTP, pas unitaire sur le legacy) ? (/10)
+- Cas nominaux ET edge cases couverts ? (/10)
+- Règles fonctionnelles couvertes par les tests ? (/10)
+
+### 2. Qualité du Code (20 pts)
+- Nommage clair (variables, méthodes, classes) (/5)
+- Séparation des responsabilités (controller/service/repository) (/5)
+- Gestion des erreurs appropriée (/5)
+- Utilisation de DTOs vs Map<String, Object> (/5)
+
+### 3. Feature stats (15 pts)
+- Feature fonctionnelle (/5)
+- Feature testée (/5)
+- Code cohérent avec le refactoring (/5)
+
+### 4. Bonus — Validation des entrées (10 pts, uniquement si traité)
+- Contrôles pertinents et cohérents (/4)
+- Retour HTTP 400 avec message explicite (/3)
+- Tests sur les cas de validation (/3)
+
+## Format de réponse attendu
+
+Pour chaque section :
+1. Score attribué avec justification courte
+2. Points positifs observés
+3. Points d'amélioration
+
+Termine par :
+- Score total sur 100 (+ bonus /10 si applicable)
+- 3 points forts principaux du candidat
+- 3 axes d'amélioration prioritaires
+- Recommandation : Hire / Hire avec mentoring / Second entretien / No hire
+
+## Code du candidat à analyser :
+````
+
+---
+
 ## 📝 Notes de l'Entretien
 
 **Candidat** : _________________________
