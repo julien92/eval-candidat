@@ -20,8 +20,7 @@ eval-candidat/
     ├── SUJET.md                       ← Challenge instructions + functional rules
     ├── pom.xml                        ← Maven config (Spring Boot 3.2, Java 17)
     └── src/main/java/com/test/legacy/
-        ├── Application.java           ← Spring Boot entry point
-        └── OrdCtrl.java               ← Single god-class (controller + entity + persistence + business logic)
+        └── Application.java           ← Single file: Spring Boot entry + controller + entity + persistence + business logic
 ```
 
 ## Tech Stack
@@ -89,7 +88,7 @@ These behaviors are embedded in the legacy code and **must be preserved** during
 
 ## Architecture Notes
 
-- **God-class design**: Everything lives in a single file `OrdCtrl.java` — REST endpoints, JPA entity (static inner class `E`), persistence via `EntityManager`, business rules, notifications, and discount logic. This is intentional to maximize the refactoring challenge.
+- **God-class design**: Everything lives in a single file `Application.java` — Spring Boot main, REST endpoints, JPA entity (static inner class `E`), persistence via `EntityManager`, business rules, notifications, and discount logic. This is intentional to maximize the refactoring challenge.
 - **Intentional code smells** (this is the point of the exercise):
   - Single-letter variable/class names (`d`, `o`, `E`, `s`, `g`, `n`)
   - Abbreviated method names (`prcOrd`, `gtOrd`, `dlOrd`, `aDsc`, `toE`, `toM`)
