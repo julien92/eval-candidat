@@ -9,10 +9,10 @@ Test technique de 20 minutes pour evaluer la capacite d'un developpeur a refacto
 │   └── src/.../legacy/
 │       └── Application.java       ← Un seul fichier : tout le code legacy
 ├── test-technique-evaluateur.md    ← Guide de notation (CONFIDENTIEL)
-├── prompt-evaluation-code.md       ← Prompt IA : analyse du code + non-regression
-├── prompt-evaluation-debrief.md    ← Prompt IA : scoring methodologie + usage IA
-├── resultats-template.md           ← Template de reference (alternative manuelle)
 ├── resultats/                      ← Dossier des resultats d'evaluation
+│   ├── prompt-evaluation-code.md  ← Prompt IA : analyse du code + non-regression
+│   ├── prompt-evaluation-debrief.md ← Prompt IA : scoring methodologie + usage IA
+│   ├── resultats-template.md      ← Template de reference (alternative manuelle)
 │   └── resultats-JD-15012026.md   ← Exemple de resultat complet
 ├── test-scenarios.sh               ← Script de non-regression (12 tests)
 ├── generate-zip-candidat.sh        ← Genere le zip a envoyer au candidat
@@ -53,16 +53,16 @@ A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 ./test-scenarios.sh http://localhost:8080
 ```
 
-2. **Analyser le code par IA** — Copier le prompt de `prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA **genere directement le fichier `resultats-XX-DDMMYYYY.md`** (ex : `resultats-JD-15012026.md`) avec :
+2. **Analyser le code par IA** — Copier le prompt de `resultats/prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA **genere directement le fichier `resultats-XX-DDMMYYYY.md`** (ex : `resultats-JD-15012026.md`) avec :
    - Les tests de non-regression (analyse statique des 12 scenarios PASS/FAIL)
    - Le scoring qualite du code et feature
    - Les sections debrief laissees vides pour l'etape suivante
 
 Sauvegarder le fichier genere dans le dossier `resultats/`. Reporter les resultats du script dans la section "Confirmation par test-scenarios.sh".
 
-> **Alternative manuelle** : copier `resultats-template.md` dans `resultats/resultats-XX-DDMMYYYY.md` et le remplir a la main.
+> **Alternative manuelle** : copier `resultats/resultats-template.md` dans `resultats/resultats-XX-DDMMYYYY.md` et le remplir a la main.
 
-**b) Debrief avec le candidat (5 min)** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller le fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a). L'IA accompagne le recruteur question par question :
+**b) Debrief avec le candidat (5 min)** — Copier le prompt de `resultats/prompt-evaluation-debrief.md` dans une IA et coller le fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a). L'IA accompagne le recruteur question par question :
 - Observations pendant le test (signaux positifs, alertes, gestion du temps)
 - Questions de debrief une par une (le recruteur donne les reponses du candidat)
 - Scoring Methodologie (/40) et Utilisation IA (/25) — l'IA propose, le recruteur valide

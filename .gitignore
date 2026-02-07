@@ -19,6 +19,7 @@ Thumbs.db
 # Résultats d'évaluation (données candidats)
 resultats/resultats-*.md
 !resultats/resultats-JD-15012026.md
+!resultats/resultats-template.md
 
 # Claude
 .claude/

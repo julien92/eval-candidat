@@ -3,7 +3,7 @@
 > **Mode d'emploi** :
 > 1. Lance le script de non-régression : `./test-scenarios.sh http://localhost:8080` (l'application du candidat doit tourner)
 > 2. Copie le prompt ci-dessous dans ton IA (ChatGPT, Claude, etc.), puis colle l'intégralité du code rendu par le candidat (tous les fichiers) à la suite
-> 3. Sauvegarde le fichier généré dans `resultats/` et reporte les résultats du script dans la section "Confirmation par test-scenarios.sh"
+> 3. Sauvegarde le fichier généré dans ce dossier (`resultats/`) et reporte les résultats du script dans la section "Confirmation par test-scenarios.sh"
 >
 > **Résultat** : l'IA génère directement un fichier `resultats-XX-DDMMYYYY.md` complet. Les sections code sont remplies, les sections débrief sont laissées vides pour l'étape suivante.
 
@@ -147,7 +147,7 @@ Génère directement le fichier `resultats-XX-DDMMYYYY.md` complet ci-dessous. R
 
 ### Méthodologie (40 pts)
 
-> À remplir via le prompt débrief (`prompt-evaluation-debrief.md`).
+> À remplir via le prompt débrief (`prompt-evaluation-debrief.md`, dans ce même dossier).
 
 | Critère | Score | Justification |
 |---------|-------|---------------|
@@ -160,7 +160,7 @@ Génère directement le fichier `resultats-XX-DDMMYYYY.md` complet ci-dessous. R
 
 ### Utilisation de l'IA (25 pts)
 
-> À remplir via le prompt débrief (`prompt-evaluation-debrief.md`).
+> À remplir via le prompt débrief (`prompt-evaluation-debrief.md`, dans ce même dossier).
 
 | Critère | Score | Justification |
 |---------|-------|---------------|
