@@ -50,12 +50,14 @@ A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 ./test-scenarios.sh http://localhost:8080
 ```
 
-**c) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. C'est le seul moyen d'evaluer la methodologie et l'utilisation de l'IA (non visibles dans le code seul).
+**c) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. Noter les reponses et les observations (approche, comportement, interaction avec l'IA).
 
-**d) Consolider dans `resultats.md`** — Remplir le template `resultats.md` (fourni dans `test-technique-evaluateur.md`) avec :
-- La sortie de l'IA (tests de non-regression + scores code/feature)
+**d) Scoring du debrief par IA** — Copier le second prompt (section "Prompt IA — Aide au scoring du debrief") et coller les observations et reponses du candidat. L'IA propose un scoring pour Methodologie (/40) et Utilisation IA (/25), et suggere des questions de relance si des zones d'ombre persistent.
+
+**e) Consolider dans `resultats.md`** — Remplir le template `resultats.md` (fourni dans `test-technique-evaluateur.md`) avec :
+- La sortie du prompt IA code (tests de non-regression + scores code/feature)
 - Les resultats confirmes par le script `test-scenarios.sh`
-- Les scores methodologie et utilisation IA (remplis par l'evaluateur)
+- La sortie du prompt IA debrief (scores methodologie + utilisation IA)
 - Les reponses du candidat au debrief
 - La recommandation finale de l'evaluateur
 
