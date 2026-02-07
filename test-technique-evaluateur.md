@@ -119,6 +119,20 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 
 ---
 
+### 5. Bonus — Validation des Entrées (10 points)
+
+> Uniquement si le candidat a traité le bonus. Ne pénalise pas s'il n'a pas eu le temps.
+
+| Critère | Points | Score | Notes |
+|---------|--------|-------|-------|
+| Validation fonctionnelle (type obligatoire et valide, amount positif) | /4 | | |
+| Retour HTTP 400 avec message explicite | /3 | | |
+| Tests sur les cas de validation | /3 | | |
+
+**Sous-total bonus** : ___/10
+
+---
+
 ## 🏆 Score Total
 
 | Section | Score |
@@ -128,6 +142,8 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 | Qualité code | /20 |
 | Feature | /15 |
 | **TOTAL** | **/100** |
+| Bonus (validation entrées) | /10 |
+| **TOTAL AVEC BONUS** | **/110** |
 
 ---
 
@@ -142,46 +158,40 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 
 ---
 
-## 🎤 Questions de Débrief (5 min après le test)
+## 🎤 Débrief avec le candidat (5 min après le test)
+
+### Questions à poser
 
 À poser systématiquement :
 
 1. "Pourquoi as-tu commencé par [ce qu'il a fait en premier] ?"
-2. "Pourquoi as-tu choisi ce type de tests ? Qu'est-ce qui t'a guidé dans ce choix ?"
+2. "Pourquoi as-tu choisi ce type de tests ?"
 3. "Qu'est-ce que tu n'as pas eu le temps de faire ?"
 4. "Y a-t-il des comportements dans le code original qui t'ont surpris ?"
 5. "Comment aurais-tu fait différemment avec plus de temps ?"
 6. "Qu'est-ce que l'IA a bien fait ? Mal fait ?"
 
+Si le candidat a traité le bonus (validation des entrées) :
+
+7. "Pourquoi as-tu choisi de faire la validation à cet endroit du code (controller / service / autre) ?"
+8. "Quels champs as-tu choisi de valider et pourquoi ceux-là en priorité ?"
+
+### Prompt IA — Accompagnement au débrief
+
+Utiliser le prompt dans **`prompt-evaluation-debrief.md`**. Coller le fichier `resultats-XX-DDMMYYYY.md` (généré à l'étape précédente) à la suite du prompt. L'IA accompagne le recruteur question par question : elle pose les questions une par une, le recruteur donne ses observations et les réponses du candidat, et l'IA aide à structurer et scorer. À la fin, elle renvoie le fichier complet mis à jour.
+
 ---
 
-## 📝 Notes de l'Entretien
+## 🤖 Prompts IA et Template
 
-**Candidat** : _________________________
+| Fichier | Rôle |
+|---------|------|
+| `prompt-evaluation-code.md` | Analyse du code : génère `resultats-XX-DDMMYYYY.md` (non-régression, qualité, feature, bonus) |
+| `prompt-evaluation-debrief.md` | Accompagnement au débrief : guide le recruteur question par question (méthodologie, utilisation IA, synthèse) |
+| `resultats-template.md` | Template de référence (alternative manuelle si l'IA n'est pas utilisée) |
+| `resultats/resultats-JD-15012026.md` | Exemple de résultat complet |
 
-**Date** : _________________________
-
-**Évaluateur** : _________________________
-
-### Points forts :
-
-
-
-### Points d'amélioration :
-
-
-
-### Questions posées par le candidat :
-
-
-
-### Comportement face à la pression du temps :
-
-
-
-### Recommandation finale :
-
-
+Le premier prompt demande le prénom, nom du candidat et la date du test pour nommer le fichier `resultats-XX-DDMMYYYY.md`.
 
 ---
 

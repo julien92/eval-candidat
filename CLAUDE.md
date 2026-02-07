@@ -154,6 +154,7 @@ Constraints:
 | AI Usage       | 25     | Prompt clarity, iteration, challenging AI output            |
 | Code Quality   | 20     | Naming, SOLID principles, error handling, DTO usage         |
 | Feature        | 15     | Stats endpoint functionality, testing, code consistency     |
+| Bonus          | +10    | Input validation on POST /api/ord (type, amount), HTTP 400  |
 
 ## Guidelines for AI Assistants Working on This Codebase
 

@@ -16,5 +16,9 @@ Thumbs.db
 # Zip généré
 *.zip
 
+# Résultats d'évaluation (données candidats)
+resultats/resultats-*.md
+!resultats/resultats-JD-15012026.md
+
 # Claude
 .claude/
