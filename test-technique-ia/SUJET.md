@@ -101,6 +101,8 @@ Ta mission : refactorer ce code ET ajouter une nouvelle fonctionnalite.
 
 **Rappel** : Le comportement existant doit etre preserve. A toi de garantir qu'il n'y a pas de regression.
 
+**Note** : L'ordre dans lequel tu abordes ces taches sera evalue.
+
 ---
 
 Bonne chance !
