@@ -1,11 +1,10 @@
 # Prompt IA — Évaluation Complète (Code + Débrief)
 
 > **Mode d'emploi** :
-> 1. Lance le script de non-régression : `./test-scenarios.sh http://localhost:8080` (l'application du candidat doit tourner)
-> 2. Copie le prompt ci-dessous dans ton IA (ChatGPT, Claude, etc.), puis colle l'intégralité du code rendu par le candidat à la suite
-> 3. L'IA analyse le code et génère le fichier `resultats-XX-DDMMYYYY.md` (sections code remplies, sections débrief vides)
-> 4. Quand tu es prêt pour le débrief, dis **"on passe au débrief"** — l'IA t'accompagne question par question
-> 5. À la fin, l'IA renvoie le fichier complet — sauvegarde-le dans ce dossier (`resultats/`)
+> 1. Copie le prompt ci-dessous dans ton IA (ChatGPT, Claude, etc.), puis colle l'intégralité du code rendu par le candidat à la suite
+> 2. L'IA exécute ou demande les résultats de `test-scenarios.sh`, puis analyse le code et génère `resultats-XX-DDMMYYYY.md`
+> 3. Quand tu es prêt pour le débrief, dis **"on passe au débrief"** — l'IA t'accompagne question par question
+> 4. À la fin, l'IA renvoie le fichier complet — sauvegarde-le dans ce dossier (`resultats/`)
 >
 > **Alternative manuelle** : copier `resultats-template.md` (dans ce même dossier) et le remplir à la main.
 
@@ -32,9 +31,23 @@ Analyse le code fourni à la suite de ce prompt. Le candidat avait 20 minutes po
 
 Le code de départ était un "god class" unique (Application.java) contenant tout : Spring Boot main, REST controller, JPA entity (classe interne statique `E`), persistence via EntityManager, business logic, notifications et discount. Variables et méthodes en noms abrégés (d, o, E, prcOrd, gtOrd, dlOrd, aDsc, toE, toM). Pas de tests. Map<String, Object> partout.
 
+## Tests de non-régression
+
+**Si tu as la capacité d'exécuter des commandes** (terminal, shell, code execution) et que l'application du candidat tourne sur `localhost:8080`, exécute directement le script :
+
+```bash
+./test-scenarios.sh http://localhost:8080
+```
+
+Utilise le résultat du script pour remplir la section "Confirmation par test-scenarios.sh" dans le fichier généré.
+
+**Sinon**, demande au recruteur : *"As-tu lancé le script `test-scenarios.sh` ? Si oui, colle la sortie ici pour que je l'intègre au fichier de résultats. Sinon, je ferai uniquement l'analyse statique du code."*
+
+Dans tous les cas, réalise aussi l'**analyse statique** (lecture du code) pour chaque scénario — cela permet de comparer avec les résultats du script et de détecter d'éventuels écarts.
+
 ## Ta mission (phase 1)
 
-1. **Vérifier les tests de non-régression** : analyse statiquement le code et détermine si chacun des 12 scénarios ci-dessous passerait ou échouerait.
+1. **Vérifier les tests de non-régression** : analyse statiquement le code et détermine si chacun des 12 scénarios ci-dessous passerait ou échouerait. Si les résultats du script sont disponibles, intègre-les aussi.
 2. **Évaluer la qualité du code** et la feature stats.
 3. **Évaluer le bonus** (validation des entrées) si le candidat l'a traité.
 4. **Générer le fichier `resultats-XX-DDMMYYYY.md`** avec les sections code remplies et les sections débrief vides.
@@ -125,7 +138,7 @@ Puis affiche le message : **"Fichier généré. Quand tu es prêt pour le débri
 
 ### Confirmation par test-scenarios.sh
 
-> À remplir après exécution du script.
+> Rempli automatiquement si les résultats du script ont été fournis ou exécutés. Sinon, à remplir manuellement.
 
 - Résultat script : ___/12 PASS
 - Écarts avec l'analyse IA :

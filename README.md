@@ -44,10 +44,9 @@ Envoyer le fichier `test-technique-ia.zip` au candidat.
 
 A la fin des 20 minutes, 3 etapes — **1 script + 1 conversation IA = 1 fichier resultat complet** :
 
-- [ ] **Lancer les tests** : `./test-scenarios.sh http://localhost:8080`
 - [ ] **Ouvrir une IA** : copier `resultats/prompt-evaluation.md`, coller le code candidat a la suite
+  - L'IA execute `test-scenarios.sh` si elle en a la capacite, sinon elle demande les resultats
   - L'IA analyse le code et genere `resultats-XX-DDMMYYYY.md` (scores code + non-regression)
-  - Reporter les resultats du script dans la section "Confirmation par test-scenarios.sh"
   - Dire **"on passe au debrief"** → l'IA guide le debrief question par question
   - A la fin, l'IA renvoie le fichier complet et mis a jour
 - [ ] **Sauvegarder** le fichier dans `resultats/`, cocher la recommandation finale
