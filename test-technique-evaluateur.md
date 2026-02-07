@@ -13,7 +13,7 @@ chmod +x test-scenarios.sh
 ./test-scenarios.sh http://localhost:8080
 ```
 
-Le script vérifie automatiquement tous les comportements métier cachés et affiche un score PASS/FAIL.
+Le script vérifie automatiquement tous les comportements métier et affiche un score PASS/FAIL.
 
 ---
 
@@ -27,18 +27,18 @@ Le script vérifie automatiquement tous les comportements métier cachés et aff
 
 ---
 
-## 🚫 Comportements Métier Cachés
+## 📋 Comportements Métier (fournis au candidat)
 
-Ces comportements doivent être découverts par le candidat via ses tests. **Ne jamais les révéler.**
+Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies au candidat. Il n'y a pas de comportement caché. Le candidat doit s'appuyer sur ces règles pour écrire ses tests de non-régression.
 
-| # | Comportement | Explication métier |
-|---|--------------|-------------------|
-| 1 | **Double save pour premium** | Le premier `save` avant le discount crée l'état "commande reçue", le second après crée "commande finalisée". Nécessaire pour l'audit comptable. |
-| 2 | **Double discount pour premium** | `aDsc()` est appelé deux fois. Les clients premium reçoivent 10% + 10% = 19% (pas 20%). Bug devenu feature, les clients s'y sont habitués. |
-| 3 | **Catch silencieux sur notify** | Les notifications email ne doivent JAMAIS bloquer une commande. Un serveur mail down ne doit pas faire perdre des ventes. |
-| 4 | **Soft delete uniquement** | La suppression est logique (`st = "del"`), jamais physique. Obligatoire pour la comptabilité et les audits. |
-| 5 | **Threshold 1000€ pour standard uniquement** | Le discount standard s'applique seulement au-dessus de 1000€. Le discount premium s'applique toujours, quel que soit le montant. |
-| 6 | **Flag "pr" pour premium** | `d.put("pr", true)` marque la commande comme premium avant le save. Utilisé par d'autres systèmes en aval. |
+| # | Comportement | Détail technique dans le code |
+|---|--------------|-------------------------------|
+| 1 | **Double save pour premium** | Le premier `save` avant le discount crée l'état "commande reçue", le second après crée "commande finalisée". |
+| 2 | **Double discount pour premium** | `aDsc()` est appelé deux fois : 10% + 10% = 19% (pas 20%). Ex : 1000 → 810. |
+| 3 | **Catch silencieux sur notify** | Les notifications email ne bloquent JAMAIS une commande. |
+| 4 | **Soft delete uniquement** | La suppression est logique (`status = "del"`), jamais physique. |
+| 5 | **Threshold 1000€ pour standard uniquement** | Le discount standard s'applique seulement au-dessus de 1000€. Le discount premium s'applique toujours. |
+| 6 | **Flag "premium" pour premium** | `d.put("premium", true)` marque la commande comme premium avant le save. |
 
 ---
 
@@ -47,7 +47,7 @@ Ces comportements doivent être découverts par le candidat via ses tests. **Ne 
 ### Signaux Positifs ✅
 
 - [ ] Commence par lire et comprendre le code
-- [ ] Écrit (ou fait écrire) des tests AVANT de toucher au code
+- [ ] Écrit des tests d'intégration HTTP AVANT de refactorer (teste le comportement, pas l'implémentation)
 - [ ] Demande à l'IA d'expliquer le code avant de le modifier
 - [ ] Pose des questions de clarification
 - [ ] Relit et challenge les suggestions de l'IA
@@ -57,6 +57,7 @@ Ces comportements doivent être découverts par le candidat via ses tests. **Ne 
 ### Signaux d'Alerte 🚩
 
 - [ ] Fonce directement dans le refacto sans tests
+- [ ] Écrit des tests unitaires sur le code legacy AVANT de refactorer (ils casseront au refacto → perte de temps)
 - [ ] Copie-colle le code dans l'IA et applique sans relire
 - [ ] Accepte le premier output de l'IA aveuglément
 - [ ] Ne pose aucune question
@@ -71,10 +72,10 @@ Ces comportements doivent être découverts par le candidat via ses tests. **Ne 
 
 | Critère | Points | Score | Notes |
 |---------|--------|-------|-------|
-| Écrit des tests AVANT de refactorer | /15 | | |
-| Tests couvrent les cas nominaux | /10 | | |
-| Tests couvrent les edge cases | /10 | | |
-| Tests détectent les comportements métier cachés | /5 | | |
+| Écrit des tests AVANT de refactorer | /10 | | |
+| Choisit le bon type de tests (intégration HTTP, pas unitaire sur le legacy) | /10 | | |
+| Tests couvrent les cas nominaux et edge cases | /10 | | |
+| Tests couvrent les règles fonctionnelles fournies | /10 | | |
 
 **Sous-total méthodologie** : ___/40
 
@@ -146,10 +147,11 @@ Ces comportements doivent être découverts par le candidat via ses tests. **Ne 
 À poser systématiquement :
 
 1. "Pourquoi as-tu commencé par [ce qu'il a fait en premier] ?"
-2. "Qu'est-ce que tu n'as pas eu le temps de faire ?"
-3. "Y a-t-il des comportements dans le code original qui t'ont surpris ?"
-4. "Comment aurais-tu fait différemment avec plus de temps ?"
-5. "Qu'est-ce que l'IA a bien fait ? Mal fait ?"
+2. "Pourquoi as-tu choisi ce type de tests ? Qu'est-ce qui t'a guidé dans ce choix ?"
+3. "Qu'est-ce que tu n'as pas eu le temps de faire ?"
+4. "Y a-t-il des comportements dans le code original qui t'ont surpris ?"
+5. "Comment aurais-tu fait différemment avec plus de temps ?"
+6. "Qu'est-ce que l'IA a bien fait ? Mal fait ?"
 
 ---
 
