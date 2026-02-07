@@ -27,12 +27,14 @@ Genere `test-technique-ia.zip` contenant uniquement le code et le sujet. **Pas d
 
 ### 2. Envoyer au candidat
 
-Envoyer le fichier `test-technique-ia.zip`. Le candidat doit d'abord mettre en place son environnement de dev et verifier que le projet se lance (`./mvnw spring-boot:run` depuis `test-technique-ia/`). **Le chrono de 20 minutes demarre une fois que le candidat a un environnement operationnel et que le projet tourne sur son poste.**
+Envoyer le fichier `test-technique-ia.zip` au candidat.
 
-Pendant ces 20 minutes, le candidat doit :
+**Deroulement en 2 temps :**
 
-- Refactorer le code legacy (lisibilite, SOLID, nommage)
-- Implementer l'endpoint `GET /api/ord/stats`
+1. **Installation (5 min)** — Le candidat dezippe le projet, ouvre son IDE et verifie que l'application se lance (`./mvnw spring-boot:run` depuis `test-technique-ia/`). Ce temps n'est pas evalue.
+2. **Test (20 min)** — Le chrono demarre une fois que le projet tourne sur le poste du candidat. Pendant ces 20 minutes, le candidat doit :
+   - Refactorer le code legacy (lisibilite, SOLID, nommage)
+   - Implementer l'endpoint `GET /api/ord/stats`
 
 ### 3. Evaluer le rendu
 
