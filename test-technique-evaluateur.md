@@ -47,7 +47,7 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 ### Signaux Positifs ✅
 
 - [ ] Commence par lire et comprendre le code
-- [ ] Écrit (ou fait écrire) des tests AVANT de toucher au code
+- [ ] Écrit des tests d'intégration HTTP AVANT de refactorer (teste le comportement, pas l'implémentation)
 - [ ] Demande à l'IA d'expliquer le code avant de le modifier
 - [ ] Pose des questions de clarification
 - [ ] Relit et challenge les suggestions de l'IA
@@ -57,6 +57,7 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 ### Signaux d'Alerte 🚩
 
 - [ ] Fonce directement dans le refacto sans tests
+- [ ] Écrit des tests unitaires sur le code legacy AVANT de refactorer (ils casseront au refacto → perte de temps)
 - [ ] Copie-colle le code dans l'IA et applique sans relire
 - [ ] Accepte le premier output de l'IA aveuglément
 - [ ] Ne pose aucune question
@@ -71,10 +72,10 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 
 | Critère | Points | Score | Notes |
 |---------|--------|-------|-------|
-| Écrit des tests AVANT de refactorer | /15 | | |
-| Tests couvrent les cas nominaux | /10 | | |
-| Tests couvrent les edge cases | /10 | | |
-| Tests couvrent les règles fonctionnelles fournies | /5 | | |
+| Écrit des tests AVANT de refactorer | /10 | | |
+| Choisit le bon type de tests (intégration HTTP, pas unitaire sur le legacy) | /10 | | |
+| Tests couvrent les cas nominaux et edge cases | /10 | | |
+| Tests couvrent les règles fonctionnelles fournies | /10 | | |
 
 **Sous-total méthodologie** : ___/40
 
@@ -146,10 +147,11 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 À poser systématiquement :
 
 1. "Pourquoi as-tu commencé par [ce qu'il a fait en premier] ?"
-2. "Qu'est-ce que tu n'as pas eu le temps de faire ?"
-3. "Y a-t-il des comportements dans le code original qui t'ont surpris ?"
-4. "Comment aurais-tu fait différemment avec plus de temps ?"
-5. "Qu'est-ce que l'IA a bien fait ? Mal fait ?"
+2. "Pourquoi as-tu choisi ce type de tests ? Qu'est-ce qui t'a guidé dans ce choix ?"
+3. "Qu'est-ce que tu n'as pas eu le temps de faire ?"
+4. "Y a-t-il des comportements dans le code original qui t'ont surpris ?"
+5. "Comment aurais-tu fait différemment avec plus de temps ?"
+6. "Qu'est-ce que l'IA a bien fait ? Mal fait ?"
 
 ---
 
