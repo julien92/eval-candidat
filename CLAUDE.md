@@ -17,17 +17,12 @@ eval-candidat/
 ├── generate-zip-candidat.sh           ← Generates candidate zip (excludes evaluator files)
 └── test-technique-ia/                 ← Main Java project
     ├── README.md                      ← Project launch instructions
-    ├── SUJET.md                       ← Challenge instructions for candidates
+    ├── SUJET.md                       ← Challenge instructions + functional rules
     ├── pom.xml                        ← Maven config (Spring Boot 3.2, Java 17)
     └── src/main/java/com/test/legacy/
         ├── Application.java           ← Spring Boot entry point
-        ├── controller/
-        │   └── OrdCtrl.java           ← REST controller (legacy, needs refactoring)
-        ├── repository/
-        │   ├── OrdDao.java            ← Data access (JPA + EntityManager)
-        │   └── OrderEntity.java       ← JPA entity (orders table)
-        └── service/
-            └── DscSvc.java            ← Discount service (10% discount)
+        ├── OrdCtrl.java               ← Monolithic legacy class (controller + persistence + business logic)
+        └── OrderEntity.java           ← JPA entity (orders table)
 ```
 
 ## Tech Stack
@@ -83,24 +78,25 @@ Orders use `Map<String, Object>` with these fields:
 | `st`  | Status                            | `null` or `"del"`         |
 | `pr`  | Premium flag                      | `true` / `null`           |
 
-## Critical Business Logic (Hidden Behaviors)
+## Critical Business Logic
 
-These behaviors are intentionally embedded in the legacy code and **must be preserved** during refactoring:
+These behaviors are embedded in the legacy code and **must be preserved** during refactoring. All functional rules are documented in `SUJET.md` and given to the candidate:
 
 1. **Standard orders > 1000**: Saved twice (second save after discount). Discount of 10% applied only when amount > 1000.
 2. **Premium orders**: Flag `pr=true` is set. Saved twice (before and after discount). Discount applied **twice** (10% + 10% = 19% total, i.e., `amount * 0.9 * 0.9`). Example: 1000 becomes 810.
-3. **Notification failures are silently caught**: Empty/null email throws `RuntimeException` from `OrdDao.n()`, but the `catch` block swallows it. Orders must succeed regardless of email validity.
+3. **Notification failures are silently caught**: Empty/null email throws `RuntimeException`, but the `catch` block swallows it. Orders must succeed regardless of email validity.
 4. **Soft delete only**: `DELETE` sets `st="del"` on the order instead of removing it. `GET` returns 404 for soft-deleted orders.
-5. **Express orders**: Use `sExp()` and `nExp()` methods (currently identical to standard save/notify).
+5. **Express orders**: Saved and notified like standard orders.
 
 ## Architecture Notes
 
-- **Layered architecture**: Controller -> Service -> Repository
+- **Monolithic single-class design**: All logic (REST endpoints, persistence, business rules, notifications, discount) lives in `OrdCtrl.java`. This is intentional to maximize the refactoring challenge.
 - **Intentional code smells** (this is the point of the exercise):
   - Single-letter variable names (`d`, `o`, `m`, `t`, `a`, `st`, `pr`)
-  - Abbreviated class/method names (`OrdCtrl`, `OrdDao`, `DscSvc`, `prcOrd`, `gtOrd`, `aDsc`)
-  - Business logic in the controller instead of services
+  - Abbreviated class/method names (`OrdCtrl`, `prcOrd`, `gtOrd`, `dlOrd`, `aDsc`, `s`, `g`, `n`)
+  - All business logic, persistence, and HTTP handling in one class
   - `Map<String, Object>` used everywhere instead of typed DTOs
+  - Private methods for save/get/notify/discount mixed with controller methods
   - No unit tests
   - No linter or formatter configured
 - **No Docker, no CI/CD**: This is a local evaluation tool
@@ -139,7 +135,6 @@ Candidates must implement `GET /api/ord/stats` returning:
 ```
 
 Constraints:
-- Use existing `OrdDao.getAll()` method
 - Exclude soft-deleted orders (`st="del"`)
 - Map type codes: `"std"` -> `"standard"`, `"prm"` -> `"premium"`, `"exp"` -> `"express"`
 
@@ -154,11 +149,11 @@ Constraints:
 
 ## Guidelines for AI Assistants Working on This Codebase
 
-1. **Preserve all hidden business logic** when refactoring. Run `test-scenarios.sh` to verify zero regressions.
+1. **Preserve all business logic** when refactoring. Run `test-scenarios.sh` to verify zero regressions.
 2. **Do not simplify the double discount** for premium orders - `aDsc()` being called twice (yielding 19% not 20%) is intentional.
 3. **Do not add email validation** that would block order creation - silent catch of notification failures is by design.
 4. **Soft delete must remain** - never physically delete records from the database.
 5. **The 1000 threshold** for standard orders must be preserved (discount only applied when amount > 1000).
 6. **Keep the double save** for standard (>1000) and premium orders - this is an intentional audit behavior.
-7. When refactoring, focus on: renaming, extracting DTOs, moving business logic to services, adding tests.
+7. When refactoring, focus on: renaming, extracting DTOs, separating into proper layers (controller/service/repository), adding tests.
 8. The Maven project root is `test-technique-ia/` - all `mvn` commands should be run from there.

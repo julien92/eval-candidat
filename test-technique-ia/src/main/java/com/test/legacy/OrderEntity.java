@@ -1,4 +1,4 @@
-package com.test.legacy.repository;
+package com.test.legacy;
 
 import jakarta.persistence.*;
 

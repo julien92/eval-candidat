@@ -28,7 +28,6 @@ Envoyer le fichier `test-technique-ia.zip`. Le candidat a 20 minutes pour :
 
 - Refactorer le code legacy (lisibilité, SOLID, nommage)
 - Implémenter l'endpoint `GET /api/ord/stats`
-- Écrire des tests
 
 ### 3. Évaluer le rendu
 
@@ -50,4 +49,3 @@ Consulter `test-technique-evaluateur.md` pour la grille de notation.
 
 - Le guide évaluateur et le barème
 - Le script de tests de non-régression
-- Les comportements cachés documentés (double discount premium, seuil 1000€, etc.)
