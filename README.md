@@ -45,26 +45,26 @@ Envoyer le fichier `test-technique-ia.zip` au candidat.
 
 A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 
-**a) Analyse du code par IA** — Copier le prompt de `prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA **genere directement le fichier `resultats-XX-DDMMYYYY.md`** (ex : `resultats-JD-15012026.md`) avec :
-- Les tests de non-regression (analyse statique des 12 scenarios PASS/FAIL)
-- Le scoring qualite du code et feature
-- Les sections debrief laissees vides pour l'etape suivante
+**a) Evaluation du code** — Deux actions a realiser :
 
-Sauvegarder le fichier genere dans le dossier `resultats/`.
-
-> **Alternative manuelle** : copier `resultats-template.md` dans `resultats/resultats-XX-DDMMYYYY.md` et le remplir a la main.
-
-**b) Tests automatiques (verification)** — Lancer le script pour confirmer les resultats de l'IA :
+1. **Lancer le script de non-regression** (l'application du candidat doit tourner sur `localhost:8080`) :
 
 ```bash
 ./test-scenarios.sh http://localhost:8080
 ```
 
-Reporter les resultats du script dans la section "Confirmation par test-scenarios.sh" du fichier.
+2. **Analyser le code par IA** — Copier le prompt de `prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA **genere directement le fichier `resultats-XX-DDMMYYYY.md`** (ex : `resultats-JD-15012026.md`) avec :
+   - Les tests de non-regression (analyse statique des 12 scenarios PASS/FAIL)
+   - Le scoring qualite du code et feature
+   - Les sections debrief laissees vides pour l'etape suivante
 
-**c) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. Noter les reponses et les observations (approche, comportement, interaction avec l'IA).
+Sauvegarder le fichier genere dans le dossier `resultats/`. Reporter les resultats du script dans la section "Confirmation par test-scenarios.sh".
 
-**d) Scoring du debrief par IA** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller a la suite : (1) le contenu du fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a), (2) les observations pendant le test, (3) les reponses du candidat. L'IA **renvoie le fichier complet et mis a jour** avec :
+> **Alternative manuelle** : copier `resultats-template.md` dans `resultats/resultats-XX-DDMMYYYY.md` et le remplir a la main.
+
+**b) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. Noter les reponses et les observations (approche, comportement, interaction avec l'IA).
+
+**c) Scoring du debrief par IA** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller a la suite : (1) le contenu du fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a), (2) les observations pendant le test, (3) les reponses du candidat. L'IA **renvoie le fichier complet et mis a jour** avec :
 - Les scores Methodologie (/40) et Utilisation IA (/25)
 - Les reponses du candidat au debrief
 - Les observations pendant le test
@@ -72,7 +72,7 @@ Reporter les resultats du script dans la section "Confirmation par test-scenario
 
 Sauvegarder le fichier mis a jour. Il ne reste qu'a cocher la recommandation finale.
 
-**e) Recommandation finale** — Cocher la recommandation (Hire / Hire avec mentoring / Second entretien / No hire) et ajouter un commentaire si necessaire. Le fichier `resultats-XX-DDMMYYYY.md` constitue le livrable de l'evaluation.
+**d) Recommandation finale** — Cocher la recommandation (Hire / Hire avec mentoring / Second entretien / No hire) et ajouter un commentaire si necessaire. Le fichier `resultats-XX-DDMMYYYY.md` constitue le livrable de l'evaluation.
 
 > Voir `resultats/resultats-JD-15012026.md` pour un exemple complet.
 
