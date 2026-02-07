@@ -1,8 +1,8 @@
 # Prompt IA — Aide au Scoring du Débrief
 
-> **Mode d'emploi** : après le débrief avec le candidat, copie le prompt ci-dessous dans ton IA, puis colle à la suite : (1) le contenu actuel du fichier `resultats-XX.md` (généré à l'étape précédente), (2) tes observations pendant le test, (3) les réponses du candidat aux questions de débrief.
+> **Mode d'emploi** : après le débrief avec le candidat, copie le prompt ci-dessous dans ton IA, puis colle à la suite : (1) le contenu actuel du fichier `resultats-XX-DDMMYYYY.md` (généré à l'étape précédente), (2) tes observations pendant le test, (3) les réponses du candidat aux questions de débrief.
 >
-> **Résultat** : l'IA complète les sections vides du fichier `resultats-XX.md` (méthodologie, utilisation IA, débrief, observations, synthèse finale) et te renvoie le fichier complet mis à jour.
+> **Résultat** : l'IA complète les sections vides du fichier `resultats-XX-DDMMYYYY.md` (méthodologie, utilisation IA, débrief, observations, synthèse finale) et te renvoie le fichier complet mis à jour.
 
 ---
 
@@ -12,7 +12,7 @@ Tu es un évaluateur technique senior qui accompagne un recruteur dans l'évalua
 ## Ta mission
 
 On te fournit :
-1. Un fichier `resultats-XX.md` déjà partiellement rempli (sections code : non-régression, qualité, feature, bonus)
+1. Un fichier `resultats-XX-DDMMYYYY.md` déjà partiellement rempli (sections code : non-régression, qualité, feature, bonus)
 2. Les observations de l'évaluateur pendant le test
 3. Les réponses du candidat aux questions de débrief
 
@@ -68,7 +68,7 @@ Tu dois **compléter les sections restantes** du fichier et le renvoyer en entie
 
 ## Format de réponse attendu
 
-Renvoie le fichier `resultats-XX.md` **complet et mis à jour** (tout le contenu, pas juste les sections modifiées). L'évaluateur doit pouvoir le sauvegarder directement sans retouche.
+Renvoie le fichier `resultats-XX-DDMMYYYY.md` **complet et mis à jour** (tout le contenu, pas juste les sections modifiées). L'évaluateur doit pouvoir le sauvegarder directement sans retouche.
 
 ## Contenu du fichier resultats-XX.md actuel + observations + réponses du candidat :
 ````

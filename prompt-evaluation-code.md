@@ -2,7 +2,7 @@
 
 > **Mode d'emploi** : copie le prompt ci-dessous dans ton IA (ChatGPT, Claude, etc.), puis colle l'intégralité du code rendu par le candidat (tous les fichiers) à la suite.
 >
-> **Résultat** : l'IA génère directement un fichier `resultats-XX.md` complet. Les sections code sont remplies, les sections débrief sont laissées vides pour l'étape suivante.
+> **Résultat** : l'IA génère directement un fichier `resultats-XX-DDMMYYYY.md` complet. Les sections code sont remplies, les sections débrief sont laissées vides pour l'étape suivante.
 
 ---
 
@@ -11,7 +11,11 @@ Tu es un évaluateur technique senior. Analyse le code ci-dessous, rendu par un 
 
 ## Étape préalable
 
-Avant toute analyse, demande le **prénom et nom du candidat** (pour nommer le fichier `resultats-XX.md` avec les initiales, ex : Jean Dupont → `resultats-JD.md`).
+Avant toute analyse, demande :
+- **Prénom et nom du candidat** (pour les initiales du fichier, ex : Jean Dupont → JD)
+- **Date du test** (pour le nom du fichier, au format DDMMYYYY)
+
+Le fichier sera nommé `resultats-XX-DDMMYYYY.md` (ex : `resultats-JD-15012026.md` pour Jean Dupont testé le 15 janvier 2026).
 
 ## Code original (avant refactoring)
 
@@ -22,7 +26,7 @@ Le code de départ était un "god class" unique (Application.java) contenant tou
 1. **Vérifier les tests de non-régression** : analyse statiquement le code et détermine si chacun des 12 scénarios ci-dessous passerait ou échouerait.
 2. **Évaluer la qualité du code** et la feature stats.
 3. **Évaluer le bonus** (validation des entrées) si le candidat l'a traité.
-4. **Générer le fichier `resultats-XX.md` complet** avec les sections code remplies et les sections débrief vides.
+4. **Générer le fichier `resultats-XX-DDMMYYYY.md` complet** avec les sections code remplies et les sections débrief vides.
 
 ## Scénarios de non-régression à vérifier
 
@@ -74,13 +78,13 @@ IMPORTANT pour les scénarios 5 et 6 : si le candidat a ajouté une validation s
 
 ## Format de réponse attendu
 
-Génère directement le fichier `resultats-XX.md` complet ci-dessous. Remplis les sections code (non-régression, qualité, feature, bonus, synthèse IA). Laisse les sections débrief (méthodologie, utilisation IA, questions, observations) avec les placeholders vides — elles seront remplies à l'étape suivante.
+Génère directement le fichier `resultats-XX-DDMMYYYY.md` complet ci-dessous. Remplis les sections code (non-régression, qualité, feature, bonus, synthèse IA). Laisse les sections débrief (méthodologie, utilisation IA, questions, observations) avec les placeholders vides — elles seront remplies à l'étape suivante.
 
 ```markdown
 # Résultats — Test Technique IA
 
 **Candidat** : [Prénom Nom]
-**Date** : _________________________
+**Date** : [Date du test]
 **Évaluateur** : _________________________
 
 ---

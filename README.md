@@ -11,7 +11,9 @@ Test technique de 20 minutes pour evaluer la capacite d'un developpeur a refacto
 ├── test-technique-evaluateur.md    ← Guide de notation (CONFIDENTIEL)
 ├── prompt-evaluation-code.md       ← Prompt IA : analyse du code + non-regression
 ├── prompt-evaluation-debrief.md    ← Prompt IA : scoring methodologie + usage IA
-├── resultats-template.md           ← Template de reference (le fichier est genere par l'IA)
+├── resultats-template.md           ← Template de reference (alternative manuelle)
+├── resultats/                      ← Dossier des resultats d'evaluation
+│   └── resultats-JD-15012026.md   ← Exemple de resultat complet
 ├── test-scenarios.sh               ← Script de non-regression (12 tests)
 ├── generate-zip-candidat.sh        ← Genere le zip a envoyer au candidat
 ├── .github/workflows/              ← CI GitHub Actions
@@ -43,12 +45,14 @@ Envoyer le fichier `test-technique-ia.zip` au candidat.
 
 A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 
-**a) Analyse du code par IA** — Copier le prompt de `prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA **genere directement le fichier `resultats-XX.md`** (initiales du candidat, ex : `resultats-JD.md`) avec :
+**a) Analyse du code par IA** — Copier le prompt de `prompt-evaluation-code.md` dans une IA et coller le code du candidat a la suite. L'IA **genere directement le fichier `resultats-XX-DDMMYYYY.md`** (ex : `resultats-JD-15012026.md`) avec :
 - Les tests de non-regression (analyse statique des 12 scenarios PASS/FAIL)
 - Le scoring qualite du code et feature
 - Les sections debrief laissees vides pour l'etape suivante
 
-Sauvegarder le fichier genere tel quel.
+Sauvegarder le fichier genere dans le dossier `resultats/`.
+
+> **Alternative manuelle** : copier `resultats-template.md` dans `resultats/resultats-XX-DDMMYYYY.md` et le remplir a la main.
 
 **b) Tests automatiques (verification)** — Lancer le script pour confirmer les resultats de l'IA :
 
@@ -56,11 +60,11 @@ Sauvegarder le fichier genere tel quel.
 ./test-scenarios.sh http://localhost:8080
 ```
 
-Reporter les resultats du script dans la section "Confirmation par test-scenarios.sh" du fichier `resultats-XX.md`.
+Reporter les resultats du script dans la section "Confirmation par test-scenarios.sh" du fichier.
 
 **c) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. Noter les reponses et les observations (approche, comportement, interaction avec l'IA).
 
-**d) Scoring du debrief par IA** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller a la suite : (1) le contenu du fichier `resultats-XX.md` genere a l'etape a), (2) les observations pendant le test, (3) les reponses du candidat. L'IA **renvoie le fichier `resultats-XX.md` complet et mis a jour** avec :
+**d) Scoring du debrief par IA** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller a la suite : (1) le contenu du fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a), (2) les observations pendant le test, (3) les reponses du candidat. L'IA **renvoie le fichier complet et mis a jour** avec :
 - Les scores Methodologie (/40) et Utilisation IA (/25)
 - Les reponses du candidat au debrief
 - Les observations pendant le test
@@ -68,7 +72,9 @@ Reporter les resultats du script dans la section "Confirmation par test-scenario
 
 Sauvegarder le fichier mis a jour. Il ne reste qu'a cocher la recommandation finale.
 
-**e) Recommandation finale** — Cocher la recommandation (Hire / Hire avec mentoring / Second entretien / No hire) et ajouter un commentaire si necessaire. Le fichier `resultats-XX.md` constitue le livrable de l'evaluation.
+**e) Recommandation finale** — Cocher la recommandation (Hire / Hire avec mentoring / Second entretien / No hire) et ajouter un commentaire si necessaire. Le fichier `resultats-XX-DDMMYYYY.md` constitue le livrable de l'evaluation.
+
+> Voir `resultats/resultats-JD-15012026.md` pour un exemple complet.
 
 ## Ce que le candidat recoit
 

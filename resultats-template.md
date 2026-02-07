@@ -1,6 +1,8 @@
 # Résultats — Test Technique IA
 
-> Copier ce fichier et le renommer `resultats-XX.md` (initiales du candidat, ex : `resultats-JD.md` pour Jean Dupont).
+> Copier ce fichier dans le dossier `resultats/` et le renommer `resultats-XX-DDMMYYYY.md` (initiales du candidat + date, ex : `resultats-JD-15012026.md` pour Jean Dupont testé le 15/01/2026).
+>
+> **Alternative** : utiliser le prompt `prompt-evaluation-code.md` pour générer ce fichier automatiquement via l'IA.
 
 **Candidat** : _________________________
 **Date** : _________________________

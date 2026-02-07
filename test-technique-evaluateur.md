@@ -186,11 +186,12 @@ Utiliser le prompt dans **`prompt-evaluation-debrief.md`**. Coller les observati
 
 | Fichier | Rôle |
 |---------|------|
-| `prompt-evaluation-code.md` | Analyse du code : non-régression (12 scénarios), qualité, feature, bonus |
-| `prompt-evaluation-debrief.md` | Scoring du débrief : méthodologie et utilisation de l'IA |
-| `resultats-template.md` | Template à copier en `resultats-XX.md` (initiales du candidat, ex : `resultats-JD.md`) |
+| `prompt-evaluation-code.md` | Analyse du code : génère `resultats-XX-DDMMYYYY.md` (non-régression, qualité, feature, bonus) |
+| `prompt-evaluation-debrief.md` | Scoring du débrief : complète le fichier résultats (méthodologie, utilisation IA, synthèse) |
+| `resultats-template.md` | Template de référence (alternative manuelle si l'IA n'est pas utilisée) |
+| `resultats/resultats-JD-15012026.md` | Exemple de résultat complet |
 
-Les deux prompts demandent le prénom et nom du candidat pour nommer le fichier résultat.
+Le premier prompt demande le prénom, nom du candidat et la date du test pour nommer le fichier `resultats-XX-DDMMYYYY.md`.
 
 ---
 
