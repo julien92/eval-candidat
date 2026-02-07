@@ -21,8 +21,7 @@ eval-candidat/
     ├── pom.xml                        ← Maven config (Spring Boot 3.2, Java 17)
     └── src/main/java/com/test/legacy/
         ├── Application.java           ← Spring Boot entry point
-        ├── OrdCtrl.java               ← Monolithic legacy class (controller + persistence + business logic)
-        └── OrderEntity.java           ← JPA entity (orders table)
+        └── OrdCtrl.java               ← Single god-class (controller + entity + persistence + business logic)
 ```
 
 ## Tech Stack
@@ -90,13 +89,13 @@ These behaviors are embedded in the legacy code and **must be preserved** during
 
 ## Architecture Notes
 
-- **Monolithic single-class design**: All logic (REST endpoints, persistence, business rules, notifications, discount) lives in `OrdCtrl.java`. This is intentional to maximize the refactoring challenge.
+- **God-class design**: Everything lives in a single file `OrdCtrl.java` — REST endpoints, JPA entity (static inner class `E`), persistence via `EntityManager`, business rules, notifications, and discount logic. This is intentional to maximize the refactoring challenge.
 - **Intentional code smells** (this is the point of the exercise):
-  - Single-letter variable names (`d`, `o`, `m`, `t`, `a`, `st`, `pr`)
-  - Abbreviated class/method names (`OrdCtrl`, `prcOrd`, `gtOrd`, `dlOrd`, `aDsc`, `s`, `g`, `n`)
+  - Single-letter variable/class names (`d`, `o`, `E`, `s`, `g`, `n`)
+  - Abbreviated method names (`prcOrd`, `gtOrd`, `dlOrd`, `aDsc`, `toE`, `toM`)
+  - JPA entity as a static inner class with package-private fields (no getters/setters)
   - All business logic, persistence, and HTTP handling in one class
   - `Map<String, Object>` used everywhere instead of typed DTOs
-  - Private methods for save/get/notify/discount mixed with controller methods
   - No unit tests
   - No linter or formatter configured
 - **No Docker, no CI/CD**: This is a local evaluation tool

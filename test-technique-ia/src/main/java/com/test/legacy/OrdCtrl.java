@@ -54,28 +54,26 @@ public class OrdCtrl {
     }
 
     private Map<String, Object> s(Map<String, Object> d) {
-        OrderEntity entity = toEntity(d);
-        if (entity.getId() == null || em.find(OrderEntity.class, entity.getId()) == null) {
+        E entity = toE(d);
+        if (entity.id == null || em.find(E.class, entity.id) == null) {
             em.persist(entity);
         } else {
             entity = em.merge(entity);
         }
-        d.put("id", entity.getId());
+        d.put("id", entity.id);
         return d;
     }
 
     private Map<String, Object> g(String id) {
-        OrderEntity entity = em.find(OrderEntity.class, id);
+        E entity = em.find(E.class, id);
         if (entity == null) return null;
-        return toMap(entity);
+        return toM(entity);
     }
 
     private List<Map<String, Object>> getAll() {
-        List<OrderEntity> entities = em.createQuery("SELECT o FROM OrderEntity o", OrderEntity.class).getResultList();
+        List<E> entities = em.createQuery("SELECT o FROM OrdCtrl$E o", E.class).getResultList();
         List<Map<String, Object>> result = new ArrayList<>();
-        for (OrderEntity e : entities) {
-            result.add(toMap(e));
-        }
+        for (E e : entities) { result.add(toM(e)); }
         return result;
     }
 
@@ -93,25 +91,33 @@ public class OrdCtrl {
         }
     }
 
-    private OrderEntity toEntity(Map<String, Object> d) {
-        OrderEntity e = new OrderEntity();
-        if (d.get("id") != null) e.setId(d.get("id").toString());
-        if (d.get("t") != null) e.setT(d.get("t").toString());
-        if (d.get("m") != null) e.setM(d.get("m").toString());
-        if (d.get("a") != null) e.setA(Integer.parseInt(d.get("a").toString()));
-        if (d.get("st") != null) e.setSt(d.get("st").toString());
-        if (d.get("pr") != null) e.setPr(Boolean.parseBoolean(d.get("pr").toString()));
+    private E toE(Map<String, Object> d) {
+        E e = new E();
+        if (d.get("id") != null) e.id = d.get("id").toString();
+        if (d.get("t") != null) e.t = d.get("t").toString();
+        if (d.get("m") != null) e.m = d.get("m").toString();
+        if (d.get("a") != null) e.a = Integer.parseInt(d.get("a").toString());
+        if (d.get("st") != null) e.st = d.get("st").toString();
+        if (d.get("pr") != null) e.pr = Boolean.parseBoolean(d.get("pr").toString());
         return e;
     }
 
-    private Map<String, Object> toMap(OrderEntity e) {
+    private Map<String, Object> toM(E e) {
         Map<String, Object> m = new HashMap<>();
-        m.put("id", e.getId());
-        m.put("t", e.getT());
-        m.put("m", e.getM());
-        m.put("a", e.getA());
-        m.put("st", e.getSt());
-        m.put("pr", e.getPr());
+        m.put("id", e.id); m.put("t", e.t); m.put("m", e.m);
+        m.put("a", e.a); m.put("st", e.st); m.put("pr", e.pr);
         return m;
+    }
+
+    @Entity @Table(name = "orders")
+    public static class E {
+        @Id @GeneratedValue(strategy = GenerationType.UUID)
+        String id;
+        String t;
+        String m;
+        Integer a;
+        String st;
+        Boolean pr;
+        public E() {}
     }
 }
