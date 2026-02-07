@@ -17,6 +17,10 @@ eval-candidat/
 ├── test-technique-evaluateur.md       ← CONFIDENTIAL evaluator grading guide
 ├── test-scenarios.sh                  ← Non-regression test script (12 scenarios)
 ├── generate-zip-candidat.sh           ← Generates candidate zip (excludes evaluator files)
+├── resultats/                         ← Evaluation results folder
+│   ├── prompt-evaluation.md           ← Single AI prompt: code analysis + debrief
+│   ├── resultats-template.md          ← Reference template (manual alternative)
+│   └── resultats-JD-15012026.md       ← Example of complete result
 ├── .github/workflows/
 │   └── test-scenarios.yml             ← CI: build + non-regression tests (--skip-feature)
 └── test-technique-ia/                 ← Main Java project
