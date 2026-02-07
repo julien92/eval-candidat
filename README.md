@@ -9,7 +9,7 @@ Test technique de 20 minutes pour evaluer la capacite d'un developpeur a refacto
 │   └── src/.../legacy/
 │       └── Application.java       ← Un seul fichier : tout le code legacy
 ├── test-technique-evaluateur.md    ← Guide de notation (CONFIDENTIEL)
-├── test-scenarios.sh               ← Script de non-regression (9 tests)
+├── test-scenarios.sh               ← Script de non-regression (12 tests)
 ├── generate-zip-candidat.sh        ← Genere le zip a envoyer au candidat
 ├── .github/workflows/              ← CI GitHub Actions
 └── README.md
@@ -27,7 +27,9 @@ Genere `test-technique-ia.zip` contenant uniquement le code et le sujet. **Pas d
 
 ### 2. Envoyer au candidat
 
-Envoyer le fichier `test-technique-ia.zip`. Le candidat a 20 minutes pour :
+Envoyer le fichier `test-technique-ia.zip`. Le candidat doit d'abord mettre en place son environnement de dev et verifier que le projet se lance (`./mvnw spring-boot:run` depuis `test-technique-ia/`). **Le chrono de 20 minutes demarre une fois que le candidat a un environnement operationnel et que le projet tourne sur son poste.**
+
+Pendant ces 20 minutes, le candidat doit :
 
 - Refactorer le code legacy (lisibilite, SOLID, nommage)
 - Implementer l'endpoint `GET /api/ord/stats`
