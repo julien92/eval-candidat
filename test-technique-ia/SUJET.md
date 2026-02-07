@@ -30,24 +30,24 @@ Ta mission : refactorer ce code ET ajouter une nouvelle fonctionnalite.
 
 ## Regles fonctionnelles du systeme
 
-### Commandes Standard (`t: "std"`)
+### Commandes Standard (`type: "std"`)
 
 - La creation d'une commande standard retourne un code HTTP 200
 - La commande est sauvegardee en base a la creation
 - Une notification est envoyee par email apres la sauvegarde
-- Si le montant (`a`) depasse 1000, une remise de 10% est appliquee (la commande est re-sauvegardee apres la remise)
+- Si le montant (`amount`) depasse 1000, une remise de 10% est appliquee (la commande est re-sauvegardee apres la remise)
 - Si le montant est inferieur ou egal a 1000, aucune remise n'est appliquee
 
-### Commandes Premium (`t: "prm"`)
+### Commandes Premium (`type: "prm"`)
 
 - La creation d'une commande premium retourne un code HTTP 200
-- Le flag premium (`pr: true`) est positionne sur la commande
+- Le flag premium (`premium: true`) est positionne sur la commande
 - La commande est sauvegardee une premiere fois a la creation
 - Une notification est envoyee par email apres la premiere sauvegarde
 - Une double remise de 10% est appliquee sur le montant quel que soit le montant (ex : 1000 * 0.9 * 0.9 = 810)
 - La commande est re-sauvegardee apres l'application des remises
 
-### Commandes Express (`t: "exp"`)
+### Commandes Express (`type: "exp"`)
 
 - La creation d'une commande express retourne un code HTTP 200
 - La commande est sauvegardee en base

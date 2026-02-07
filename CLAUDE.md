@@ -68,23 +68,23 @@ cd test-technique-ia && mvn spring-boot:run
 
 Orders use `Map<String, Object>` with these fields:
 
-| Field | Description                       | Values                    |
-|-------|-----------------------------------|---------------------------|
-| `t`   | Order type                        | `"std"`, `"prm"`, `"exp"` |
-| `m`   | Customer email                    | String                    |
-| `a`   | Amount (integer, cents or units)  | Integer                   |
-| `id`  | Order ID (UUID, auto-generated)   | String                    |
-| `st`  | Status                            | `null` or `"del"`         |
-| `pr`  | Premium flag                      | `true` / `null`           |
+| Field       | Description                       | Values                    |
+|-------------|-----------------------------------|---------------------------|
+| `type`      | Order type                        | `"std"`, `"prm"`, `"exp"` |
+| `email`     | Customer email                    | String                    |
+| `amount`    | Amount (integer)                  | Integer                   |
+| `id`        | Order ID (UUID, auto-generated)   | String                    |
+| `status`    | Status                            | `null` or `"del"`         |
+| `premium`   | Premium flag                      | `true` / `null`           |
 
 ## Critical Business Logic
 
 These behaviors are embedded in the legacy code and **must be preserved** during refactoring. All functional rules are documented in `SUJET.md` and given to the candidate (there are no hidden behaviors):
 
 1. **Standard orders > 1000**: Saved twice (second save after discount). Discount of 10% applied only when amount > 1000.
-2. **Premium orders**: Flag `pr=true` is set. Saved twice (before and after discount). Discount applied **twice** (10% + 10% = 19% total, i.e., `amount * 0.9 * 0.9`). Example: 1000 becomes 810.
+2. **Premium orders**: Flag `premium=true` is set. Saved twice (before and after discount). Discount applied **twice** (10% + 10% = 19% total, i.e., `amount * 0.9 * 0.9`). Example: 1000 becomes 810.
 3. **Notification failures are silently caught**: Empty/null email throws `RuntimeException`, but the `catch` block swallows it. Orders must succeed regardless of email validity.
-4. **Soft delete only**: `DELETE` sets `st="del"` on the order instead of removing it. `GET` returns 404 for soft-deleted orders.
+4. **Soft delete only**: `DELETE` sets `status="del"` on the order instead of removing it. `GET` returns 404 for soft-deleted orders.
 5. **Express orders**: Saved and notified like standard orders.
 
 ## Architecture Notes

@@ -36,9 +36,9 @@ Toutes les règles fonctionnelles sont documentées dans `SUJET.md` et fournies 
 | 1 | **Double save pour premium** | Le premier `save` avant le discount crée l'état "commande reçue", le second après crée "commande finalisée". |
 | 2 | **Double discount pour premium** | `aDsc()` est appelé deux fois : 10% + 10% = 19% (pas 20%). Ex : 1000 → 810. |
 | 3 | **Catch silencieux sur notify** | Les notifications email ne bloquent JAMAIS une commande. |
-| 4 | **Soft delete uniquement** | La suppression est logique (`st = "del"`), jamais physique. |
+| 4 | **Soft delete uniquement** | La suppression est logique (`status = "del"`), jamais physique. |
 | 5 | **Threshold 1000€ pour standard uniquement** | Le discount standard s'applique seulement au-dessus de 1000€. Le discount premium s'applique toujours. |
-| 6 | **Flag "pr" pour premium** | `d.put("pr", true)` marque la commande comme premium avant le save. |
+| 6 | **Flag "premium" pour premium** | `d.put("premium", true)` marque la commande comme premium avant le save. |
 
 ---
 

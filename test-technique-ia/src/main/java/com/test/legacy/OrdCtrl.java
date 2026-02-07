@@ -18,22 +18,22 @@ public class OrdCtrl {
 
     @PostMapping("/ord")
     public ResponseEntity prcOrd(@RequestBody Map<String, Object> d) {
-        if(d.get("t").equals("std")){
+        if(d.get("type").equals("std")){
             s(d);
-            try{n(d.get("m"),d);}catch(Exception e){/**/}
-            if(d.get("a")!=null&&Integer.parseInt(d.get("a").toString())>1000){
+            try{n(d.get("email"),d);}catch(Exception e){/**/}
+            if(d.get("amount")!=null&&Integer.parseInt(d.get("amount").toString())>1000){
                 s(d);aDsc(d);
             }
         }
-        if(d.get("t").equals("prm")){
-            d.put("pr",true);s(d);
-            try{n(d.get("m"),d);}catch(Exception e){/**/}
-            if(d.get("a")!=null){aDsc(d);aDsc(d);}
+        if(d.get("type").equals("prm")){
+            d.put("premium",true);s(d);
+            try{n(d.get("email"),d);}catch(Exception e){/**/}
+            if(d.get("amount")!=null){aDsc(d);aDsc(d);}
             s(d);
         }
-        if(d.get("t").equals("exp")){
+        if(d.get("type").equals("exp")){
             s(d);
-            try{n(d.get("m"),d);}catch(Exception e){System.out.println("err");}
+            try{n(d.get("email"),d);}catch(Exception e){System.out.println("err");}
         }
         return ResponseEntity.ok(d);
     }
@@ -42,14 +42,14 @@ public class OrdCtrl {
     public ResponseEntity gtOrd(@PathVariable String id) {
         Map<String, Object> o = g(id);
         if(o==null){return ResponseEntity.notFound().build();}
-        if(o.get("st")!=null&&o.get("st").equals("del")){return ResponseEntity.notFound().build();}
+        if(o.get("status")!=null&&o.get("status").equals("del")){return ResponseEntity.notFound().build();}
         return ResponseEntity.ok(o);
     }
 
     @DeleteMapping("/ord/{id}")
     public ResponseEntity dlOrd(@PathVariable String id) {
         Map<String, Object> o = g(id);
-        if(o!=null){o.put("st","del");s(o);}
+        if(o!=null){o.put("status","del");s(o);}
         return ResponseEntity.ok().build();
     }
 
@@ -84,28 +84,28 @@ public class OrdCtrl {
     }
 
     private void aDsc(Map<String, Object> d) {
-        if (d.get("a") != null) {
-            int amount = Integer.parseInt(d.get("a").toString());
+        if (d.get("amount") != null) {
+            int amount = Integer.parseInt(d.get("amount").toString());
             int discounted = (int) (amount * (1 - DSC));
-            d.put("a", discounted);
+            d.put("amount", discounted);
         }
     }
 
     private E toE(Map<String, Object> d) {
         E e = new E();
         if (d.get("id") != null) e.id = d.get("id").toString();
-        if (d.get("t") != null) e.t = d.get("t").toString();
-        if (d.get("m") != null) e.m = d.get("m").toString();
-        if (d.get("a") != null) e.a = Integer.parseInt(d.get("a").toString());
-        if (d.get("st") != null) e.st = d.get("st").toString();
-        if (d.get("pr") != null) e.pr = Boolean.parseBoolean(d.get("pr").toString());
+        if (d.get("type") != null) e.type = d.get("type").toString();
+        if (d.get("email") != null) e.email = d.get("email").toString();
+        if (d.get("amount") != null) e.amount = Integer.parseInt(d.get("amount").toString());
+        if (d.get("status") != null) e.status = d.get("status").toString();
+        if (d.get("premium") != null) e.premium = Boolean.parseBoolean(d.get("premium").toString());
         return e;
     }
 
     private Map<String, Object> toM(E e) {
         Map<String, Object> m = new HashMap<>();
-        m.put("id", e.id); m.put("t", e.t); m.put("m", e.m);
-        m.put("a", e.a); m.put("st", e.st); m.put("pr", e.pr);
+        m.put("id", e.id); m.put("type", e.type); m.put("email", e.email);
+        m.put("amount", e.amount); m.put("status", e.status); m.put("premium", e.premium);
         return m;
     }
 
@@ -113,11 +113,11 @@ public class OrdCtrl {
     public static class E {
         @Id @GeneratedValue(strategy = GenerationType.UUID)
         String id;
-        String t;
-        String m;
-        Integer a;
-        String st;
-        Boolean pr;
+        String type;
+        String email;
+        Integer amount;
+        String status;
+        Boolean premium;
         public E() {}
     }
 }
