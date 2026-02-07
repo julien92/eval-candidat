@@ -80,7 +80,7 @@ Orders use `Map<String, Object>` with these fields:
 
 ## Critical Business Logic
 
-These behaviors are embedded in the legacy code and **must be preserved** during refactoring. All functional rules are documented in `SUJET.md` and given to the candidate:
+These behaviors are embedded in the legacy code and **must be preserved** during refactoring. All functional rules are documented in `SUJET.md` and given to the candidate (there are no hidden behaviors):
 
 1. **Standard orders > 1000**: Saved twice (second save after discount). Discount of 10% applied only when amount > 1000.
 2. **Premium orders**: Flag `pr=true` is set. Saved twice (before and after discount). Discount applied **twice** (10% + 10% = 19% total, i.e., `amount * 0.9 * 0.9`). Example: 1000 becomes 810.
