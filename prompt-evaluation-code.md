@@ -2,7 +2,7 @@
 
 > **Mode d'emploi** : copie le prompt ci-dessous dans ton IA (ChatGPT, Claude, etc.), puis colle l'intégralité du code rendu par le candidat (tous les fichiers) à la suite.
 >
-> **Périmètre** : ce prompt évalue le code (non-régression, qualité, feature, bonus). Les sections **Méthodologie** et **Utilisation de l'IA** sont évaluées via le prompt débrief (`prompt-evaluation-debrief.md`).
+> **Résultat** : l'IA génère directement un fichier `resultats-XX.md` complet. Les sections code sont remplies, les sections débrief sont laissées vides pour l'étape suivante.
 
 ---
 
@@ -12,7 +12,9 @@ Tu es un évaluateur technique senior. Analyse le code ci-dessous, rendu par un 
 ## Étape préalable
 
 Avant toute analyse, demande :
-- **Prénom et nom du candidat** (pour nommer le fichier résultat `resultats-XX.md` avec les initiales, ex : Jean Dupont → `resultats-JD.md`)
+- **Prénom et nom du candidat** (pour nommer le fichier `resultats-XX.md` avec les initiales, ex : Jean Dupont → `resultats-JD.md`)
+- **Date du test**
+- **Nom de l'évaluateur**
 
 ## Code original (avant refactoring)
 
@@ -23,7 +25,7 @@ Le code de départ était un "god class" unique (Application.java) contenant tou
 1. **Vérifier les tests de non-régression** : analyse statiquement le code et détermine si chacun des 12 scénarios ci-dessous passerait ou échouerait.
 2. **Évaluer la qualité du code** et la feature stats.
 3. **Évaluer le bonus** (validation des entrées) si le candidat l'a traité.
-4. **Produire la sortie** au format `resultats-XX.md` (sections code uniquement).
+4. **Générer le fichier `resultats-XX.md` complet** avec les sections code remplies et les sections débrief vides.
 
 ## Scénarios de non-régression à vérifier
 
@@ -48,11 +50,7 @@ IMPORTANT pour les scénarios 5 et 6 : si le candidat a ajouté une validation s
 
 ## Grille d'évaluation
 
-### 1. Tests de non-régression (analyse statique)
-
-Remplis le tableau PASS/FAIL pour les 12 scénarios ci-dessus. Compte le nombre total de PASS.
-
-### 2. Qualité du Code (20 pts)
+### Qualité du Code (20 pts)
 
 | Critère | Barème |
 |---------|--------|
@@ -61,7 +59,7 @@ Remplis le tableau PASS/FAIL pour les 12 scénarios ci-dessus. Compte le nombre 
 | Gestion des erreurs appropriée | /5 |
 | Utilisation de DTOs vs Map<String, Object> | /5 |
 
-### 3. Feature stats (15 pts)
+### Feature stats (15 pts)
 
 | Critère | Barème |
 |---------|--------|
@@ -69,7 +67,7 @@ Remplis le tableau PASS/FAIL pour les 12 scénarios ci-dessus. Compte le nombre 
 | Feature testée | /5 |
 | Code cohérent avec le refactoring | /5 |
 
-### 4. Bonus — Validation des entrées (10 pts, uniquement si traité)
+### Bonus — Validation des entrées (10 pts, uniquement si traité)
 
 | Critère | Barème |
 |---------|--------|
@@ -79,10 +77,20 @@ Remplis le tableau PASS/FAIL pour les 12 scénarios ci-dessus. Compte le nombre 
 
 ## Format de réponse attendu
 
-Réponds directement au format markdown suivant. Ce contenu sera copié dans les sections correspondantes du fichier `resultats-XX.md` :
+Génère directement le fichier `resultats-XX.md` complet ci-dessous. Remplis les sections code (non-régression, qualité, feature, bonus, synthèse IA). Laisse les sections débrief (méthodologie, utilisation IA, questions, observations) avec les placeholders vides — elles seront remplies à l'étape suivante.
 
 ```markdown
-## 1. Tests de non-régression (analyse statique)
+# Résultats — Test Technique IA
+
+**Candidat** : [Prénom Nom]
+**Date** : [Date]
+**Évaluateur** : [Nom]
+
+---
+
+## 1. Tests de non-régression
+
+### Analyse statique par IA
 
 | # | Scénario | Résultat | Commentaire |
 |---|----------|----------|-------------|
@@ -99,9 +107,20 @@ Réponds directement au format markdown suivant. Ce contenu sera copié dans les
 | 11 | Stats endpoint | PASS/FAIL | |
 | 12 | Commande std, amount=2000 | PASS/FAIL | |
 
-**Résultat** : ___/12 PASS
+**Résultat IA** : ___/12 PASS
 
-## 2. Qualité du Code (20 pts)
+### Confirmation par test-scenarios.sh
+
+> À remplir après exécution du script.
+
+- Résultat script : ___/12 PASS
+- Écarts avec l'analyse IA :
+
+---
+
+## 2. Scores
+
+### Qualité du Code (20 pts)
 
 | Critère | Score | Justification |
 |---------|-------|---------------|
@@ -112,7 +131,7 @@ Réponds directement au format markdown suivant. Ce contenu sera copié dans les
 
 **Sous-total** : ___/20
 
-## 3. Feature stats (15 pts)
+### Feature stats (15 pts)
 
 | Critère | Score | Justification |
 |---------|-------|---------------|
@@ -122,7 +141,33 @@ Réponds directement au format markdown suivant. Ce contenu sera copié dans les
 
 **Sous-total** : ___/15
 
-## 4. Bonus — Validation des entrées (10 pts)
+### Méthodologie (40 pts)
+
+> À remplir via le prompt débrief (`prompt-evaluation-debrief.md`).
+
+| Critère | Score | Justification |
+|---------|-------|---------------|
+| Tests écrits AVANT le refactoring | /10 | |
+| Bon type de tests (intégration HTTP) | /10 | |
+| Cas nominaux et edge cases couverts | /10 | |
+| Règles fonctionnelles couvertes | /10 | |
+
+**Sous-total** : ___/40
+
+### Utilisation de l'IA (25 pts)
+
+> À remplir via le prompt débrief (`prompt-evaluation-debrief.md`).
+
+| Critère | Score | Justification |
+|---------|-------|---------------|
+| Prompts clairs et structurés | /10 | |
+| Itère intelligemment | /5 | |
+| Challenge les suggestions de l'IA | /5 | |
+| Sait quand NE PAS utiliser l'IA | /5 | |
+
+**Sous-total** : ___/25
+
+### Bonus — Validation des entrées (10 pts)
 
 > Laisser vide si le candidat n'a pas traité le bonus.
 
@@ -134,13 +179,87 @@ Réponds directement au format markdown suivant. Ce contenu sera copié dans les
 
 **Sous-total** : ___/10
 
-## Synthèse IA — Code
+---
 
-- **Score code + feature** : ___/35 (+ bonus ___/10)
-- **Tests de non-régression** : ___/12 PASS
-- **3 points forts** :
-- **3 axes d'amélioration** :
-- **Régressions détectées** : (lister les scénarios FAIL et l'impact)
+## 3. Débrief candidat
+
+> À remplir pendant le débrief.
+
+**"Pourquoi as-tu commencé par [ce qu'il a fait en premier] ?"**
+
+
+**"Pourquoi as-tu choisi ce type de tests ?"**
+
+
+**"Qu'est-ce que tu n'as pas eu le temps de faire ?"**
+
+
+**"Y a-t-il des comportements dans le code qui t'ont surpris ?"**
+
+
+**"Comment aurais-tu fait différemment avec plus de temps ?"**
+
+
+**"Qu'est-ce que l'IA a bien fait ? Mal fait ?"**
+
+
+**Si bonus traité — "Pourquoi la validation à cet endroit du code ?"**
+
+
+**Si bonus traité — "Quels champs validés et pourquoi ceux-là en priorité ?"**
+
+
+---
+
+## 4. Observations pendant le test
+
+> À remplir par l'évaluateur.
+
+### Signaux positifs observés :
+
+
+### Signaux d'alerte observés :
+
+
+### Comportement face à la pression du temps :
+
+
+---
+
+## 5. Synthèse
+
+| Section | Score |
+|---------|-------|
+| Méthodologie | /40 |
+| Utilisation IA | /25 |
+| Qualité code | /20 |
+| Feature | /15 |
+| **TOTAL** | **/100** |
+| Bonus | /10 |
+| **TOTAL AVEC BONUS** | **/110** |
+
+### Points forts :
+
+[Rempli par l'IA — 3 points forts identifiés dans le code]
+
+### Axes d'amélioration :
+
+[Rempli par l'IA — 3 axes d'amélioration identifiés dans le code]
+
+### Régressions détectées :
+
+[Rempli par l'IA — lister les scénarios FAIL et leur impact]
+
+### Recommandation finale :
+
+> À remplir par l'évaluateur après le débrief.
+
+- [ ] Hire
+- [ ] Hire (avec mentoring)
+- [ ] Second entretien recommandé
+- [ ] No hire
+
+**Commentaire** :
 ```
 
 ## Code du candidat à analyser :
