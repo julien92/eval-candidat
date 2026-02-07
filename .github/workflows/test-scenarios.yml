@@ -21,12 +21,12 @@ jobs:
 
       - name: Build project
         working-directory: test-technique-ia
-        run: mvn package -DskipTests -q
+        run: ./mvnw package -DskipTests -q
 
       - name: Start Spring Boot application
         working-directory: test-technique-ia
         run: |
-          mvn spring-boot:run &
+          ./mvnw spring-boot:run &
           echo $! > /tmp/spring-boot.pid
 
       - name: Wait for application to start
