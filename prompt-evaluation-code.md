@@ -11,10 +11,7 @@ Tu es un évaluateur technique senior. Analyse le code ci-dessous, rendu par un 
 
 ## Étape préalable
 
-Avant toute analyse, demande :
-- **Prénom et nom du candidat** (pour nommer le fichier `resultats-XX.md` avec les initiales, ex : Jean Dupont → `resultats-JD.md`)
-- **Date du test**
-- **Nom de l'évaluateur**
+Avant toute analyse, demande le **prénom et nom du candidat** (pour nommer le fichier `resultats-XX.md` avec les initiales, ex : Jean Dupont → `resultats-JD.md`).
 
 ## Code original (avant refactoring)
 
@@ -83,8 +80,8 @@ Génère directement le fichier `resultats-XX.md` complet ci-dessous. Remplis le
 # Résultats — Test Technique IA
 
 **Candidat** : [Prénom Nom]
-**Date** : [Date]
-**Évaluateur** : [Nom]
+**Date** : _________________________
+**Évaluateur** : _________________________
 
 ---
 
