@@ -247,33 +247,155 @@ Termine par :
 
 ---
 
-## 📝 Notes de l'Entretien
+## 📝 Template `resultats.md`
+
+A la fin de l'évaluation, copie le template ci-dessous dans un fichier `resultats.md` et remplis-le. Ce fichier constitue le livrable de l'évaluation.
+
+````markdown
+# Résultats — Test Technique IA
 
 **Candidat** : _________________________
-
 **Date** : _________________________
-
 **Évaluateur** : _________________________
 
-### Points forts :
+---
+
+## 1. Tests automatiques (test-scenarios.sh)
+
+- Résultat global : ___/12 PASS
+- Scénarios en échec :
 
 
+---
 
-### Points d'amélioration :
+## 2. Scores
+
+### Méthodologie (40 pts)
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| Tests écrits AVANT le refactoring | /10 | |
+| Bon type de tests (intégration HTTP) | /10 | |
+| Cas nominaux et edge cases couverts | /10 | |
+| Règles fonctionnelles couvertes | /10 | |
+
+**Sous-total** : ___/40
+
+### Utilisation de l'IA (25 pts)
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| Prompts clairs et structurés | /10 | |
+| Itère intelligemment | /5 | |
+| Challenge les suggestions de l'IA | /5 | |
+| Sait quand NE PAS utiliser l'IA | /5 | |
+
+**Sous-total** : ___/25
+
+### Qualité du Code (20 pts)
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| Nommage clair | /5 | |
+| Séparation des responsabilités | /5 | |
+| Gestion des erreurs | /5 | |
+| Utilisation de DTOs | /5 | |
+
+**Sous-total** : ___/20
+
+### Feature stats (15 pts)
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| Feature fonctionnelle | /5 | |
+| Feature testée | /5 | |
+| Code cohérent avec le refactoring | /5 | |
+
+**Sous-total** : ___/15
+
+### Bonus — Validation des entrées (10 pts)
+
+> Laisser vide si le candidat n'a pas traité le bonus.
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| Contrôles pertinents et cohérents | /4 | |
+| Retour HTTP 400 avec message explicite | /3 | |
+| Tests sur les cas de validation | /3 | |
+
+**Sous-total** : ___/10
+
+---
+
+## 3. Débrief candidat
+
+**"Pourquoi as-tu commencé par [ce qu'il a fait en premier] ?"**
 
 
+**"Pourquoi as-tu choisi ce type de tests ?"**
 
-### Questions posées par le candidat :
 
+**"Qu'est-ce que tu n'as pas eu le temps de faire ?"**
+
+
+**"Y a-t-il des comportements dans le code qui t'ont surpris ?"**
+
+
+**"Comment aurais-tu fait différemment avec plus de temps ?"**
+
+
+**"Qu'est-ce que l'IA a bien fait ? Mal fait ?"**
+
+
+**Si bonus traité — "Pourquoi la validation à cet endroit du code ?"**
+
+
+**Si bonus traité — "Quels champs validés et pourquoi ceux-là en priorité ?"**
+
+
+---
+
+## 4. Observations pendant le test
+
+### Signaux positifs observés :
+
+
+### Signaux d'alerte observés :
 
 
 ### Comportement face à la pression du temps :
 
 
+---
+
+## 5. Synthèse
+
+| Section | Score |
+|---------|-------|
+| Méthodologie | /40 |
+| Utilisation IA | /25 |
+| Qualité code | /20 |
+| Feature | /15 |
+| **TOTAL** | **/100** |
+| Bonus | /10 |
+| **TOTAL AVEC BONUS** | **/110** |
+
+### Points forts :
+
+
+### Axes d'amélioration :
+
 
 ### Recommandation finale :
 
+- [ ] Hire
+- [ ] Hire (avec mentoring)
+- [ ] Second entretien recommandé
+- [ ] No hire
 
+**Commentaire** :
+
+````
 
 ---
 
