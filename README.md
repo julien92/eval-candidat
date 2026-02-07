@@ -40,21 +40,24 @@ Envoyer le fichier `test-technique-ia.zip` au candidat.
 
 A la fin des 20 minutes, suivre ces etapes dans l'ordre :
 
-**a) Tests automatiques** — Recuperer le projet du candidat, le lancer puis executer le script de non-regression :
+**a) Pre-evaluation par IA** — Copier le prompt fourni dans `test-technique-evaluateur.md` (section "Prompt d'Aide a l'Evaluation") dans une IA et coller le code du candidat a la suite. L'IA remplit automatiquement :
+- Les tests de non-regression (analyse statique des 12 scenarios PASS/FAIL)
+- Le scoring qualite du code et feature
+
+**b) Tests automatiques (verification)** — Lancer le script pour confirmer les resultats de l'IA :
 
 ```bash
 ./test-scenarios.sh http://localhost:8080
 ```
 
-**b) Pre-evaluation par IA** — Copier le prompt fourni dans `test-technique-evaluateur.md` (section "Prompt d'Aide a l'Evaluation") dans une IA et coller le code du candidat a la suite. L'IA genere un pre-scoring structure sur la qualite du code et la feature.
-
 **c) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. C'est le seul moyen d'evaluer la methodologie et l'utilisation de l'IA (non visibles dans le code seul).
 
 **d) Consolider dans `resultats.md`** — Remplir le template `resultats.md` (fourni dans `test-technique-evaluateur.md`) avec :
-- Le resultat des tests automatiques (PASS/FAIL)
-- Le pre-scoring IA
+- La sortie de l'IA (tests de non-regression + scores code/feature)
+- Les resultats confirmes par le script `test-scenarios.sh`
+- Les scores methodologie et utilisation IA (remplis par l'evaluateur)
 - Les reponses du candidat au debrief
-- Les scores finaux de l'evaluateur et la recommandation
+- La recommandation finale de l'evaluateur
 
 Ce fichier constitue le livrable de l'evaluation.
 
