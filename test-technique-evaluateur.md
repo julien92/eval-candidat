@@ -173,7 +173,6 @@ Si le candidat a traité le bonus (validation des entrées) :
 
 7. "Pourquoi as-tu choisi de faire la validation à cet endroit du code (controller / service / autre) ?"
 8. "Quels champs as-tu choisi de valider et pourquoi ceux-là en priorité ?"
-9. "Comment gères-tu le cas où plusieurs champs sont invalides en même temps ?"
 
 ---
 
