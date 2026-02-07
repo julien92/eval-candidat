@@ -2,7 +2,7 @@
 
 > Copier ce fichier et le renommer `resultats-XX-DDMMYYYY.md` (initiales du candidat + date, ex : `resultats-JD-15012026.md` pour Jean Dupont testé le 15/01/2026).
 >
-> **Alternative** : utiliser le prompt `prompt-evaluation-code.md` (dans ce même dossier) pour générer ce fichier automatiquement via l'IA.
+> **Alternative** : utiliser le prompt `prompt-evaluation.md` (dans ce même dossier) pour générer ce fichier automatiquement via l'IA.
 
 **Candidat** : _________________________
 **Date** : _________________________

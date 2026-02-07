@@ -18,8 +18,7 @@ eval-candidat/
 ├── test-scenarios.sh                  ← Non-regression test script (12 scenarios)
 ├── generate-zip-candidat.sh           ← Generates candidate zip (excludes evaluator files)
 ├── resultats/                         ← Evaluation results folder
-│   ├── prompt-evaluation-code.md      ← AI prompt: code analysis + non-regression
-│   ├── prompt-evaluation-debrief.md   ← AI prompt: methodology + AI usage scoring
+│   ├── prompt-evaluation.md           ← Single AI prompt: code analysis + debrief
 │   ├── resultats-template.md          ← Reference template (manual alternative)
 │   └── resultats-JD-15012026.md       ← Example of complete result
 ├── .github/workflows/

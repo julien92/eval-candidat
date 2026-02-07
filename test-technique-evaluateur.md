@@ -178,7 +178,7 @@ Si le candidat a traité le bonus (validation des entrées) :
 
 ### Prompt IA — Accompagnement au débrief
 
-Utiliser le prompt dans **`resultats/prompt-evaluation-debrief.md`**. Coller le fichier `resultats-XX-DDMMYYYY.md` (généré à l'étape précédente) à la suite du prompt. L'IA accompagne le recruteur question par question : elle pose les questions une par une, le recruteur donne ses observations et les réponses du candidat, et l'IA aide à structurer et scorer. À la fin, elle renvoie le fichier complet mis à jour.
+Dans la même conversation IA (ouverte avec **`resultats/prompt-evaluation.md`**), dire **"on passe au débrief"**. L'IA accompagne le recruteur question par question : elle pose les questions une par une, le recruteur donne ses observations et les réponses du candidat, et l'IA aide à structurer et scorer. À la fin, elle renvoie le fichier complet mis à jour.
 
 ---
 
@@ -186,12 +186,11 @@ Utiliser le prompt dans **`resultats/prompt-evaluation-debrief.md`**. Coller le 
 
 | Fichier | Rôle |
 |---------|------|
-| `resultats/prompt-evaluation-code.md` | Analyse du code : génère `resultats-XX-DDMMYYYY.md` (non-régression, qualité, feature, bonus) |
-| `resultats/prompt-evaluation-debrief.md` | Accompagnement au débrief : guide le recruteur question par question (méthodologie, utilisation IA, synthèse) |
+| `resultats/prompt-evaluation.md` | Prompt unique : analyse du code (phase 1) + accompagnement au débrief (phase 2) dans une seule conversation IA |
 | `resultats/resultats-template.md` | Template de référence (alternative manuelle si l'IA n'est pas utilisée) |
 | `resultats/resultats-JD-15012026.md` | Exemple de résultat complet |
 
-Le premier prompt demande le prénom, nom du candidat et la date du test pour nommer le fichier `resultats-XX-DDMMYYYY.md`.
+Le prompt demande le prénom, nom du candidat et la date du test pour nommer le fichier `resultats-XX-DDMMYYYY.md`.
 
 ---
 
