@@ -45,7 +45,7 @@ jobs:
       - name: Run non-regression test scenarios
         run: |
           chmod +x test-scenarios.sh
-          ./test-scenarios.sh http://localhost:8080
+          ./test-scenarios.sh --skip-feature http://localhost:8080
 
       - name: Stop Spring Boot application
         if: always()

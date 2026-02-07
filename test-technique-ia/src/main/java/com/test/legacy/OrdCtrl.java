@@ -55,12 +55,12 @@ public class OrdCtrl {
 
     private Map<String, Object> s(Map<String, Object> d) {
         E entity = toE(d);
-        if (entity.id == null || em.find(E.class, entity.id) == null) {
+        if (entity.i == null || em.find(E.class, entity.i) == null) {
             em.persist(entity);
         } else {
             entity = em.merge(entity);
         }
-        d.put("id", entity.id);
+        d.put("id", entity.i);
         return d;
     }
 
@@ -93,31 +93,31 @@ public class OrdCtrl {
 
     private E toE(Map<String, Object> d) {
         E e = new E();
-        if (d.get("id") != null) e.id = d.get("id").toString();
-        if (d.get("type") != null) e.type = d.get("type").toString();
-        if (d.get("email") != null) e.email = d.get("email").toString();
-        if (d.get("amount") != null) e.amount = Integer.parseInt(d.get("amount").toString());
-        if (d.get("status") != null) e.status = d.get("status").toString();
-        if (d.get("premium") != null) e.premium = Boolean.parseBoolean(d.get("premium").toString());
+        if (d.get("id") != null) e.i = d.get("id").toString();
+        if (d.get("type") != null) e.t = d.get("type").toString();
+        if (d.get("email") != null) e.m = d.get("email").toString();
+        if (d.get("amount") != null) e.a = Integer.parseInt(d.get("amount").toString());
+        if (d.get("status") != null) e.s = d.get("status").toString();
+        if (d.get("premium") != null) e.p = Boolean.parseBoolean(d.get("premium").toString());
         return e;
     }
 
     private Map<String, Object> toM(E e) {
         Map<String, Object> m = new HashMap<>();
-        m.put("id", e.id); m.put("type", e.type); m.put("email", e.email);
-        m.put("amount", e.amount); m.put("status", e.status); m.put("premium", e.premium);
+        m.put("id", e.i); m.put("type", e.t); m.put("email", e.m);
+        m.put("amount", e.a); m.put("status", e.s); m.put("premium", e.p);
         return m;
     }
 
     @Entity @Table(name = "orders")
     public static class E {
         @Id @GeneratedValue(strategy = GenerationType.UUID)
-        String id;
-        String type;
-        String email;
-        Integer amount;
-        String status;
-        Boolean premium;
+        String i;
+        String t;
+        String m;
+        Integer a;
+        String s;
+        Boolean p;
         public E() {}
     }
 }

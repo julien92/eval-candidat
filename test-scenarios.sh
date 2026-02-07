@@ -4,12 +4,25 @@
 # Script de Test — Evaluation Candidat
 # ============================================================================
 #
-# Usage : ./test-scenarios.sh [BASE_URL]
+# Usage : ./test-scenarios.sh [OPTIONS] [BASE_URL]
 # Exemple : ./test-scenarios.sh http://localhost:8080
+#           ./test-scenarios.sh --skip-feature http://localhost:8080
+#
+# Options :
+#   --skip-feature  Ignore le scenario 9 (nouvelle feature stats)
 #
 # ============================================================================
 
-BASE_URL="${1:-http://localhost:8080}"
+SKIP_FEATURE=false
+BASE_URL="http://localhost:8080"
+
+for arg in "$@"; do
+    if [[ "$arg" == "--skip-feature" ]]; then
+        SKIP_FEATURE=true
+    else
+        BASE_URL="$arg"
+    fi
+done
 PASSED=0
 FAILED=0
 TOTAL=0
@@ -177,26 +190,32 @@ else
 fi
 
 # ============================================================================
-echo ""
-echo "SCENARIO 9 : Endpoint Stats (nouvelle feature)"
-echo "----------------------------------------------------------------------------"
-
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/api/ord/stats")
-
-if [[ "$HTTP_CODE" == "200" ]]; then
-    RESPONSE=$(curl -s "$BASE_URL/api/ord/stats")
-    test_status_code "Endpoint stats existe" "200" "$HTTP_CODE"
-    test_scenario "Stats contient totalOrders" "totalOrders" "$RESPONSE"
-    test_scenario "Stats contient ordersByType" "ordersByType" "$RESPONSE"
-
-    # Verifier que les commandes supprimees sont exclues
-    # 7 commandes creees (scenarios 1-6 + 8), 1 supprimee (scenario 8) -> totalOrders = 6
-    test_scenario "Stats exclut les commandes supprimees (totalOrders=6)" '"totalOrders":6' "$RESPONSE"
+if [[ "$SKIP_FEATURE" == "true" ]]; then
+    echo ""
+    echo "SCENARIO 9 : SKIP (--skip-feature)"
+    echo "----------------------------------------------------------------------------"
 else
-    TOTAL=$((TOTAL + 1))
-    FAILED=$((FAILED + 1))
-    echo -e "${RED}FAIL${NC} — Endpoint stats n'existe pas (HTTP $HTTP_CODE)"
-    echo -e "   ${YELLOW}Le candidat n'a pas implemente la feature${NC}"
+    echo ""
+    echo "SCENARIO 9 : Endpoint Stats (nouvelle feature)"
+    echo "----------------------------------------------------------------------------"
+
+    HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$BASE_URL/api/ord/stats")
+
+    if [[ "$HTTP_CODE" == "200" ]]; then
+        RESPONSE=$(curl -s "$BASE_URL/api/ord/stats")
+        test_status_code "Endpoint stats existe" "200" "$HTTP_CODE"
+        test_scenario "Stats contient totalOrders" "totalOrders" "$RESPONSE"
+        test_scenario "Stats contient ordersByType" "ordersByType" "$RESPONSE"
+
+        # Verifier que les commandes supprimees sont exclues
+        # 7 commandes creees (scenarios 1-6 + 8), 1 supprimee (scenario 8) -> totalOrders = 6
+        test_scenario "Stats exclut les commandes supprimees (totalOrders=6)" '"totalOrders":6' "$RESPONSE"
+    else
+        TOTAL=$((TOTAL + 1))
+        FAILED=$((FAILED + 1))
+        echo -e "${RED}FAIL${NC} — Endpoint stats n'existe pas (HTTP $HTTP_CODE)"
+        echo -e "   ${YELLOW}Le candidat n'a pas implemente la feature${NC}"
+    fi
 fi
 
 # ============================================================================
