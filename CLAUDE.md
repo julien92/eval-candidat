@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-This repository is a **developer assessment framework** for evaluating candidates on legacy Java code refactoring with AI assistance. It contains an intentionally poorly-written order management system that candidates must refactor within 20 minutes while preserving all existing behavior.
+This repository is a **developer assessment framework** designed to evaluate a candidate's ability to work with legacy code **while being assisted by AI** (ChatGPT, Claude, Copilot, etc.). The goal is to observe how the candidate uses AI as a productivity tool: prompt quality, critical thinking on AI suggestions, and ability to validate output.
+
+The project contains an intentionally poorly-written order management system that candidates must refactor within 20 minutes while preserving all existing behavior and implementing a new feature.
 
 **Domain**: Order management system (create, retrieve, soft-delete orders with discount logic).
 
@@ -15,6 +17,8 @@ eval-candidat/
 ├── test-technique-evaluateur.md       ← CONFIDENTIAL evaluator grading guide
 ├── test-scenarios.sh                  ← Non-regression test script (9 scenarios)
 ├── generate-zip-candidat.sh           ← Generates candidate zip (excludes evaluator files)
+├── .github/workflows/
+│   └── test-scenarios.yml             ← CI: build + non-regression tests (--skip-feature)
 └── test-technique-ia/                 ← Main Java project
     ├── README.md                      ← Project launch instructions
     ├── SUJET.md                       ← Challenge instructions + functional rules
@@ -60,7 +64,7 @@ cd test-technique-ia && mvn spring-boot:run
 |----------|-------------------|--------------------------------------|
 | `POST`   | `/api/ord`        | Create an order (std, prm, exp)      |
 | `GET`    | `/api/ord/{id}`   | Get order by ID (404 if deleted)     |
-| `DELETE` | `/api/ord/{id}`   | Soft-delete an order (sets st="del") |
+| `DELETE` | `/api/ord/{id}`   | Soft-delete an order (sets status="del") |
 | `GET`    | `/api/ord/stats`  | **New feature** candidates must implement |
 
 ### Request/Response Format
@@ -97,7 +101,7 @@ These behaviors are embedded in the legacy code and **must be preserved** during
   - `Map<String, Object>` used everywhere instead of typed DTOs
   - No unit tests
   - No linter or formatter configured
-- **No Docker, no CI/CD**: This is a local evaluation tool
+- **CI/CD**: GitHub Actions workflow (`.github/workflows/test-scenarios.yml`) runs the build and non-regression tests on push/PR. Uses `--skip-feature` flag to skip the stats endpoint scenario (not yet implemented in the base code). No Docker.
 
 ## Non-Regression Tests (test-scenarios.sh)
 
@@ -106,8 +110,8 @@ The test script runs 9 scenarios via `curl` against a running instance:
 | # | Scenario                                | Assertion                     |
 |---|-----------------------------------------|-------------------------------|
 | 1 | Standard order creation                 | HTTP 200                      |
-| 2 | Premium order with `pr:true` flag       | Response contains `"pr":true` |
-| 3 | Premium double discount (1000 -> 810)   | Response contains `"a":810`   |
+| 2 | Premium order with `premium:true` flag  | Response contains `"premium":true` |
+| 3 | Premium double discount (1000 -> 810)   | Response contains `"amount":810`   |
 | 4 | Express order creation                  | HTTP 200                      |
 | 5 | Empty email does not block order        | HTTP 200                      |
 | 6 | GET existing order                      | HTTP 200                      |
@@ -133,14 +137,14 @@ Candidates must implement `GET /api/ord/stats` returning:
 ```
 
 Constraints:
-- Exclude soft-deleted orders (`st="del"`)
+- Exclude soft-deleted orders (`status="del"`)
 - Map type codes: `"std"` -> `"standard"`, `"prm"` -> `"premium"`, `"exp"` -> `"express"`
 
 ## Evaluation Rubric (100 points)
 
 | Category       | Points | Key Criteria                                                |
 |----------------|--------|-------------------------------------------------------------|
-| Methodology    | 40     | Test-first approach, edge cases, hidden logic discovery     |
+| Methodology    | 40     | Test-first approach, right test type (integration HTTP), edge cases |
 | AI Usage       | 25     | Prompt clarity, iteration, challenging AI output            |
 | Code Quality   | 20     | Naming, SOLID principles, error handling, DTO usage         |
 | Feature        | 15     | Stats endpoint functionality, testing, code consistency     |
