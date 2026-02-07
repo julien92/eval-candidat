@@ -15,26 +15,6 @@ Test technique de 20 minutes pour evaluer la capacite d'un developpeur a refacto
 └── README.md
 ```
 
-## API
-
-| Methode  | Endpoint          | Description                          |
-|----------|-------------------|--------------------------------------|
-| `POST`   | `/api/ord`        | Creer une commande (std, prm, exp)   |
-| `GET`    | `/api/ord/{id}`   | Recuperer une commande par ID        |
-| `DELETE` | `/api/ord/{id}`   | Suppression logique (soft delete)    |
-| `GET`    | `/api/ord/stats`  | **Nouvelle feature** a implementer   |
-
-### Champs d'une commande
-
-| Champ       | Description       | Valeurs possibles          |
-|-------------|-------------------|----------------------------|
-| `id`        | Identifiant UUID  | Auto-genere                |
-| `type`      | Type de commande  | `"std"`, `"prm"`, `"exp"` |
-| `email`     | Email client      | String                     |
-| `amount`    | Montant           | Integer                    |
-| `status`    | Statut            | `null` ou `"del"`          |
-| `premium`   | Flag premium      | `true` / `null`            |
-
 ## Workflow
 
 ### 1. Preparer le zip candidat
