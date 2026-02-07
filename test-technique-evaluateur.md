@@ -187,7 +187,7 @@ Utiliser le prompt dans **`prompt-evaluation-debrief.md`**. Coller les observati
 | Fichier | Rôle |
 |---------|------|
 | `prompt-evaluation-code.md` | Analyse du code : génère `resultats-XX-DDMMYYYY.md` (non-régression, qualité, feature, bonus) |
-| `prompt-evaluation-debrief.md` | Scoring du débrief : complète le fichier résultats (méthodologie, utilisation IA, synthèse) |
+| `prompt-evaluation-debrief.md` | Accompagnement au débrief : guide le recruteur question par question (méthodologie, utilisation IA, synthèse) |
 | `resultats-template.md` | Template de référence (alternative manuelle si l'IA n'est pas utilisée) |
 | `resultats/resultats-JD-15012026.md` | Exemple de résultat complet |
 

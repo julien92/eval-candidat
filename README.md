@@ -62,17 +62,14 @@ Sauvegarder le fichier genere dans le dossier `resultats/`. Reporter les resulta
 
 > **Alternative manuelle** : copier `resultats-template.md` dans `resultats/resultats-XX-DDMMYYYY.md` et le remplir a la main.
 
-**b) Debrief avec le candidat (5 min)** — Poser les questions listees dans `test-technique-evaluateur.md`. Noter les reponses et les observations (approche, comportement, interaction avec l'IA).
+**b) Debrief avec le candidat (5 min)** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller le fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a). L'IA accompagne le recruteur question par question :
+- Observations pendant le test (signaux positifs, alertes, gestion du temps)
+- Questions de debrief une par une (le recruteur donne les reponses du candidat)
+- Scoring Methodologie (/40) et Utilisation IA (/25) — l'IA propose, le recruteur valide
 
-**c) Scoring du debrief par IA** — Copier le prompt de `prompt-evaluation-debrief.md` dans une IA et coller a la suite : (1) le contenu du fichier `resultats-XX-DDMMYYYY.md` genere a l'etape a), (2) les observations pendant le test, (3) les reponses du candidat. L'IA **renvoie le fichier complet et mis a jour** avec :
-- Les scores Methodologie (/40) et Utilisation IA (/25)
-- Les reponses du candidat au debrief
-- Les observations pendant le test
-- La synthese finale (total, points forts, axes d'amelioration)
+A la fin, l'IA renvoie le fichier `resultats-XX-DDMMYYYY.md` complet et mis a jour.
 
-Sauvegarder le fichier mis a jour. Il ne reste qu'a cocher la recommandation finale.
-
-**d) Recommandation finale** — Cocher la recommandation (Hire / Hire avec mentoring / Second entretien / No hire) et ajouter un commentaire si necessaire. Le fichier `resultats-XX-DDMMYYYY.md` constitue le livrable de l'evaluation.
+**c) Recommandation finale** — Cocher la recommandation (Hire / Hire avec mentoring / Second entretien / No hire) et ajouter un commentaire si necessaire. Le fichier `resultats-XX-DDMMYYYY.md` constitue le livrable de l'evaluation.
 
 > Voir `resultats/resultats-JD-15012026.md` pour un exemple complet.
 
